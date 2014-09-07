@@ -8,7 +8,7 @@
 
 	public class BirdIdGUI extends JFrame {
 		
-		public ImageShowerFrame()
+		public BirdIdGUI()
 		{
 			super("Image Shower!");
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
