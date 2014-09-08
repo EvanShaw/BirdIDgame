@@ -1,37 +1,31 @@
 
 
-	import javax.imageio.ImageIO;
+	
 	import javax.swing.*;
-	import java.awt.*;
-	import java.awt.image.BufferedImage;
-	import java.io.IOException;
+
+import java.awt.*;
+	
+
 
 	public class BirdIdGUI extends JFrame {
 		
 		public BirdIdGUI()
 		{
-			super("Image Shower!");
+			super("BirdIdGUI");
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			this.setSize(600, 500);
+			this.setSize(500, 500);
 			
-			Container pane = this.getContentPane();
+			Container contain = this.getContentPane();
 
-			pane.add(new JLabel("Are you happy?"), BorderLayout.NORTH);
+		contain.add(new JLabel("Bird I dentification program"), BorderLayout.NORTH);
+		
 			
-			JButton happyBtn = new JButton("I'm happy!");
-			pane.add(happyBtn, BorderLayout.SOUTH);
-			
-			try {
-				
-				BufferedImage birdImg = ImageIO.read(this.getClass().getResource("images/BlueFootedBooby.png"));
-				JLabel imageLabel = new JLabel(new ImageIcon(birdImg));
-				pane.add(imageLabel,BorderLayout.CENTER);
-			}
-			catch (Exception ex)
-			{
-				JLabel errorLabel = new JLabel("Error while loading image");
-				pane.add(errorLabel,BorderLayout.CENTER);
-			}
+			JButton birdBtn1 = new JButton("Bird name 1");
+			contain.add(birdBtn1, BorderLayout.SOUTH);
+			JButton birdBtn2 = new JButton("Bird name 2");
+			JButton birdBtn3 = new JButton("Bird name 3");
+			contain.add(birdBtn2, BorderLayout.SOUTH);
+			contain.add(birdBtn3, BorderLayout.SOUTH);
 			
 			
 		}
@@ -40,9 +34,9 @@
 			
 			EventQueue.invokeLater(new Runnable()
 			{
-				@Override
+				
 				public void run() {
-					ImageShowerFrame myFrame = new ImageShowerFrame();
+					BirdIdGUI myFrame = new BirdIdGUI();
 					myFrame.setVisible(true);								
 				}
 			});
@@ -51,4 +45,4 @@
 
 	}
 
-}
+
