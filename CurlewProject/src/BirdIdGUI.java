@@ -1,71 +1,59 @@
-
-
-	import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-	public class BirdIdGUI extends JFrame {
+public class BirdIdGUI extends JFrame implements ActionListener {
+
+	int score;
+	JLabel scoreLabel;
+	
+	public BirdIdGUI() {
+
+		super("BirdIdGUI");
 		
-		public BirdIdGUI()
-		{
-			super("Image Shower!");
-			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			this.setSize(600, 500);
-			
-			Container pane = this.getContentPane();
+		//setting the fields
+		score = 0;
+		scoreLabel = new JLabel("Score: " + score);
+		
+		//basic window operations
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(500, 500);
 
-			pane.add(new JLabel("Are you happy?"), BorderLayout.NORTH);
-			
-			JButton happyBtn = new JButton("I'm happy!");
-			pane.add(happyBtn, BorderLayout.SOUTH);
-			
-			try {
-				
-				BufferedImage birdImg = ImageIO.read(this.getClass().getResource("images/BlueFootedBooby.png"));
-				JLabel imageLabel = new JLabel(new ImageIcon(birdImg));
-				pane.add(imageLabel,BorderLayout.CENTER);
-			}
-			catch (Exception ex)
-			{
-				JLabel errorLabel = new JLabel("Error while loading image");
-				pane.add(errorLabel,BorderLayout.CENTER);
-			}
-			
-			
-		}
+		//setting the panels and layouts
+		Container contain = this.getContentPane();
+		contain.setLayout(new BorderLayout());
+		JPanel southButtonPanel = new JPanel(new FlowLayout());
+		contain.add(southButtonPanel, BorderLayout.SOUTH);
+		
+		contain.add(scoreLabel, BorderLayout.NORTH);
 
-		public static void main(String[] args) {
-			
-			ArrayList<String> test = new ArrayList<String>();
-			for (int i = 0; i <= 10; i++) {
-				test.add("poop");
+		//creating the buttons
+		JButton birdBtn1 = new JButton("Bird name 1");
+		JButton birdBtn2 = new JButton("Bird name 2");
+		JButton birdBtn3 = new JButton("Bird name 3");
+		southButtonPanel.add(birdBtn1);
+		southButtonPanel.add(birdBtn2);
+		southButtonPanel.add(birdBtn3);
+
+		//adding listeners to buttons
+		
+	}
+
+	public static void main(String[] args) {
+
+		EventQueue.invokeLater(new Runnable() {
+
+			public void run() {
+				BirdIdGUI myFrame = new BirdIdGUI();
+				myFrame.setVisible(true);
 			}
-			String target = "poop";
-			int count = 0;
-			
-			
-			for (int i = 0; i < test.size(); i++) {
-				if (test.get(i).equals(target)) {
-					test.remove(i);
-					break;
-				}
-			}
-				
-			System.out.println(test.toString());
-			
-			EventQueue.invokeLater(new Runnable()
-			{
-				@Override
-				public void run() {
-					BirdIdGUI myFrame = new BirdIdGUI();
-					myFrame.setVisible(true);								
-				}
-			});
-			
-		}
+		});
 
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+	}
+}
