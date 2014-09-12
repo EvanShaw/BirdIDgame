@@ -1,42 +1,59 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class BirdIdGUI extends JFrame implements ActionListener {
+
+	int score;
+	JLabel scoreLabel;
 	
+	public BirdIdGUI() {
 
-
-	public class BirdIdGUI extends JFrame {
+		super("BirdIdGUI");
 		
-		public BirdIdGUI()
-		{
-			super("BirdIdGUI");
-			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			this.setSize(500, 500);
-			
-			Container contain = this.getContentPane();
-
-		contain.add(new JLabel("Bird I dentification program"), BorderLayout.NORTH);
+		//setting the fields
+		score = 0;
+		scoreLabel = new JLabel("Score: " + score);
 		
-			
-			JButton birdBtn1 = new JButton("Bird name 1");
-			contain.add(birdBtn1, BorderLayout.SOUTH);
-			JButton birdBtn2 = new JButton("Bird name 2");
-			JButton birdBtn3 = new JButton("Bird name 3");
-			contain.add(birdBtn2, BorderLayout.SOUTH);
-			contain.add(birdBtn3, BorderLayout.SOUTH);
-			
-			
-		}
+		//basic window operations
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(500, 500);
 
-		public static void main(String[] args) {
-			
-			EventQueue.invokeLater(new Runnable()
-			{
-				
-				public void run() {
-					BirdIdGUI myFrame = new BirdIdGUI();
-					myFrame.setVisible(true);								
-				}
-			});
-			
-		}
+		//setting the panels and layouts
+		Container contain = this.getContentPane();
+		contain.setLayout(new BorderLayout());
+		JPanel southButtonPanel = new JPanel(new FlowLayout());
+		contain.add(southButtonPanel, BorderLayout.SOUTH);
+		
+		contain.add(scoreLabel, BorderLayout.NORTH);
+
+		//creating the buttons
+		JButton birdBtn1 = new JButton("Bird name 1");
+		JButton birdBtn2 = new JButton("Bird name 2");
+		JButton birdBtn3 = new JButton("Bird name 3");
+		southButtonPanel.add(birdBtn1);
+		southButtonPanel.add(birdBtn2);
+		southButtonPanel.add(birdBtn3);
+
+		//adding listeners to buttons
+		
+	}
+
+	public static void main(String[] args) {
+
+		EventQueue.invokeLater(new Runnable() {
+
+			public void run() {
+				BirdIdGUI myFrame = new BirdIdGUI();
+				myFrame.setVisible(true);
+			}
+		});
 
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+	}
+}
