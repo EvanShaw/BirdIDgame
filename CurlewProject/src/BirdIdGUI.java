@@ -37,7 +37,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		southButtonPanel.add(birdBtn3);
 
 		//adding listeners to buttons
-		
+		birdBtn1.addActionListener(this);
+		birdBtn2.addActionListener(this);
+		birdBtn3.addActionListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -53,7 +55,14 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		
+	public void actionPerformed(ActionEvent event) {
+		JButton sourceButton = (JButton) event.getSource();
+		if (sourceButton.getText().equals(CORRECT)) {
+			sourceButton.setBackground(Color.GREEN);
+			score++;
+		} else {
+			sourceButton.setBackground(Color.RED);
+			CORRECT.setBackground(Color.GREEN);
+		}
 	}
 }

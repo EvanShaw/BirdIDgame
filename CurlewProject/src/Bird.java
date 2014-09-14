@@ -1,4 +1,3 @@
-
 public class Bird {
 	String imagePath;
 	String birdName;
