@@ -55,12 +55,12 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		if (sourceButton.getText().equals(CORRECT)) {
+		//if (sourceButton.getText().equals(CORRECT)) {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
-		} else {
+		//} else {
 			sourceButton.setBackground(Color.RED);
-			CORRECT.setBackground(Color.GREEN);
-		}
+		//	CORRECT.setBackground(Color.GREEN);
+		//}
 	}
 }
