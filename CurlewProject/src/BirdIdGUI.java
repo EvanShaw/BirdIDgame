@@ -1,7 +1,14 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class BirdIdGUI extends JFrame implements ActionListener {
 
@@ -43,7 +50,19 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-
+		//Scanner scanner;
+		try {
+			Scanner scanner = new Scanner(new File("/CurlewProject/src/Image source/starter_resources_from_BIRDCorp/starter_birdlist.csv"));
+			scanner.useDelimiter(",");
+	        
+	        while(scanner.hasNext()){
+	            System.out.print(scanner.next()+"|");
+	        }
+	        scanner.close();
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        
 		EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
@@ -57,12 +76,12 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		if (sourceButton.getText().equals(CORRECT)) {
+		//if (sourceButton.getText().equals(CORRECT)) {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
-		} else {
+		//} else {
 			sourceButton.setBackground(Color.RED);
-			CORRECT.setBackground(Color.GREEN);
-		}
+		//	CORRECT.setBackground(Color.GREEN);
+		//}
 	}
 }
