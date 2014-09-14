@@ -52,38 +52,15 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(imageLabel,BorderLayout.CENTER);
 	}
 
-	public static void main(String[] args) {
-		//Scanner scanner;
-		try {
-			Scanner scanner = new Scanner(new File("src/starter_birdlist.csv"));
-			scanner.useDelimiter(",");
-	        while(scanner.hasNext()){
-	            System.out.print(scanner.next()+"|");
-	        }
-	        scanner.close();
-		} catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-        
-		EventQueue.invokeLater(new Runnable() {
-
-			public void run() {
-				BirdIdGUI myFrame = new BirdIdGUI();
-				myFrame.setVisible(true);
-			}
-		});
-
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		//if (sourceButton.getText().equals(CORRECT)) {
+		if (sourceButton.getText().equals(CORRECT)) {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
-		//} else {
+		} else {
 			sourceButton.setBackground(Color.RED);
-		//	CORRECT.setBackground(Color.GREEN);
-		//}
+			CORRECT.setBackground(Color.GREEN);
+		}
 	}
 }
