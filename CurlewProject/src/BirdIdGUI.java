@@ -7,6 +7,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 
 	int score;
 	JLabel scoreLabel;
+	JLabel ImageLabel;
 	
 	public BirdIdGUI() {
 
@@ -40,6 +41,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birdBtn1.addActionListener(this);
 		birdBtn2.addActionListener(this);
 		birdBtn3.addActionListener(this);
+		
+		//Add images
+		
+		JLabel imageLabel = new JLabel(new ImageIcon());
+		contain.add(imageLabel,BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {
