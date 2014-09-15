@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BirdIdGUI extends JFrame implements ActionListener {
 
@@ -12,6 +13,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	ArrayList<Bird> birds;
 	Bird currentBird;
 	int index;
+	JButton birdBtn1;
+	JButton birdBtn2;
+	JButton birdBtn3;
+	
+	
 	
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
@@ -36,9 +42,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(scoreLabel, BorderLayout.NORTH);
 
 		//creating the buttons
-		JButton birdBtn1 = new JButton("Bird name 1");
-		JButton birdBtn2 = new JButton("Bird name 2");
-		JButton birdBtn3 = new JButton("Bird name 3");
+		 birdBtn1 = new JButton("Bird name 1");
+		 birdBtn2 = new JButton("Bird name 2");
+		 birdBtn3 = new JButton("Bird name 3");
 		southButtonPanel.add(birdBtn1);
 		southButtonPanel.add(birdBtn2);
 		southButtonPanel.add(birdBtn3);
@@ -52,8 +58,28 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		JLabel imageLabel = new JLabel(new ImageIcon());
 		contain.add(imageLabel, BorderLayout.CENTER);
+		
+		
+		
 	}
-
+	public void buttonPopulator(ArrayList<Bird> birdPop,int index,Bird currentBird){
+		Random r=new Random();
+		Random birdCount=new Random();
+		int randNum=r.nextInt(3);
+		int birdIndex=birdCount.nextInt(birdPop.size());
+		
+		
+		if(randNum==0){
+			birdBtn1.setText(birdPop.get(birdIndex).getBirdName());
+		}else if(randNum==1){
+			birdBtn2.setText(birdPop.get(birdIndex).getBirdName());
+		}else{
+			birdBtn3.setText(birdPop.get(birdIndex).getBirdName());
+		}
+		
+		
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
