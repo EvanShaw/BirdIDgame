@@ -10,19 +10,31 @@ public class GetBirds {
 		ArrayList<Bird> birds = new ArrayList<>();
 		try {
 			Scanner scanner = new Scanner(new File("src/starter_birdlist.csv"));
-			//scanner.nextLine();
-			scanner.useDelimiter(",");
-			
+			scanner.nextLine();
+			String[] splitter = {};
 	        while(scanner.hasNextLine()){
-	        	
-	            birds.add(new Bird(scanner.next(), scanner.next()));
+	        	splitter = scanner.nextLine().split(",");
+	        	String birdName = splitter[0];
+	        	String imagePath = splitter[1];
+		        birds.add(new Bird(birdName, imagePath));
 	        }
-	       
+	        scanner.close();
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println(birds.get(1).getBirdName() + birds.get(1).getImagePath());
+		/* 
+		 * Will delete these lines. It's just a test. I called the 6th index at the end
+		 * so you'd be able to see how the exception throws properly too, since the file
+		 * ends at 6 birds, index 5.
+		*/
+		System.out.println(birds.get(0).getBirdName() + " " + birds.get(0).getImagePath());
+		System.out.println(birds.get(1).getBirdName() + " " + birds.get(1).getImagePath());
+		System.out.println(birds.get(2).getBirdName() + " " + birds.get(2).getImagePath());
+		System.out.println(birds.get(3).getBirdName() + " " + birds.get(3).getImagePath());
+		System.out.println(birds.get(4).getBirdName() + " " + birds.get(4).getImagePath());
+		System.out.println(birds.get(5).getBirdName() + " " + birds.get(5).getImagePath());
+		//System.out.println(birds.get(6).getBirdName() + " " + birds.get(6).getImagePath());
 		
 		//EventQueue.invokeLater(new Runnable() {
 
