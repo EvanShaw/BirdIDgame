@@ -93,30 +93,39 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
+		Color defaultColor = sourceButton.getBackground();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
-			scoreLabel.setText("Score "+score);
+			scoreLabel.setText("Score: " + score);
 		} else {
 			sourceButton.setBackground(Color.RED);
 		}
 		index++;
 		if (index == birds.size()) {
-			//end program
+			endProgram();
 		} else {
-			//pause();
-			currentBird = birds.get(index);
-			image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
-			sourceButton.setBorderPainted(false);
-			buttonPopulator();
+			resetAfterAction(sourceButton, defaultColor);
 		}
 	}
 	
-	//public void pause() {
-		//try {
-		    //Thread.sleep(3000);
-		//} catch (InterruptedException e) {
-		  //  e.printStackTrace();
-		//}
-	//}
+	public void endProgram() {
+		
+	}
+	
+	public void resetAfterAction(JButton sourceButton, Color defaultColor) {
+		pause();
+		currentBird = birds.get(index);
+		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
+		sourceButton.setBackground(defaultColor);
+		buttonPopulator();
+	}
+	
+	public void pause() {
+		try {
+			Thread.sleep(3000);
+       	} catch (InterruptedException e) {
+       		e.printStackTrace();
+        }
+	}
 }
