@@ -96,6 +96,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
+			scoreLabel.setText("Score "+score);
 		} else {
 			sourceButton.setBackground(Color.RED);
 		}
@@ -103,7 +104,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		if (index == birds.size()) {
 			//end program
 		} else {
-			pause();
+			//pause();
 			currentBird = birds.get(index);
 			image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 			sourceButton.setBorderPainted(false);
@@ -111,11 +112,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		}
 	}
 	
-	public void pause() {
-		try {
-		    Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
-		}
-	}
+	//public void pause() {
+		//try {
+		    //Thread.sleep(3000);
+		//} catch (InterruptedException e) {
+		  //  e.printStackTrace();
+		//}
+	//}
 }
