@@ -114,8 +114,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	
 	public void endProgram() {
 		
-			JLabel end= new JLabel("You Answered"+score+"/"+birds.size()+"correctly");
-			contain.add(end, BorderLayout.CENTER);
+			scoreLabel.setText("You Answered"+score+"/"+birds.size()+"correctly");
+			
 		
 		
 	}
