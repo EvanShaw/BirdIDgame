@@ -62,25 +62,25 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		
 	}
-	public void buttonPopulator(ArrayList<Bird> birdPop,int index,Bird currentBird){
+	public void buttonPopulator(){
 		Random r=new Random();
 		Random birdCount=new Random();
 		int randNum=r.nextInt(3);
-		int birdIndex=birdCount.nextInt(birdPop.size());
-		
+		int birdIndex=birdCount.nextInt(birds.size());
+	
 		
 		if(randNum==0){
-			birdBtn1.setText(birdPop.get(birdIndex).getBirdName());
+			birdBtn1.setText(birds.get(birdIndex).getBirdName());
 		}else if(randNum==1){
-			birdBtn2.setText(birdPop.get(birdIndex).getBirdName());
+			birdBtn2.setText(birds.get(birdIndex).getBirdName());
 		}else{
-			birdBtn3.setText(birdPop.get(birdIndex).getBirdName());
+			birdBtn3.setText(birds.get(birdIndex).getBirdName());
 		}
 		
 		
 		
 	}
-	@Override
+	
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
 		//if (sourceButton.getText().equals(CORRECT)) {
