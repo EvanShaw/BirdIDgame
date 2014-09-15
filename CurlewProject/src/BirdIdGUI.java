@@ -30,7 +30,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		//basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(500, 600);
+		this.setSize(600, 500);
 
 		//setting the panels and layouts
 		Container contain = this.getContentPane();
@@ -56,7 +56,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		//Add images
 		image = new JLabel();
-		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));		
+		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
+		image.setHorizontalAlignment(SwingConstants.CENTER);
 		contain.add(image, BorderLayout.CENTER);
 	}
 
