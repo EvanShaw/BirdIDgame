@@ -1,7 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -31,7 +35,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		//basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(500, 500);
+		this.setSize(500, 600);
 
 		//setting the panels and layouts
 		Container contain = this.getContentPane();
@@ -42,9 +46,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(scoreLabel, BorderLayout.NORTH);
 
 		//creating the buttons
-		 birdBtn1 = new JButton("Bird name 1");
-		 birdBtn2 = new JButton("Bird name 2");
-		 birdBtn3 = new JButton("Bird name 3");
+		birdBtn1 = new JButton();
+		birdBtn2 = new JButton();
+		birdBtn3 = new JButton();
+		buttonPopulator();
 		southButtonPanel.add(birdBtn1);
 		southButtonPanel.add(birdBtn2);
 		southButtonPanel.add(birdBtn3);
@@ -55,41 +60,55 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birdBtn3.addActionListener(this);
 		
 		//Add images
+		JLabel image = new JLabel();
+		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 		
-		JLabel imageLabel = new JLabel(new ImageIcon());
-		contain.add(imageLabel, BorderLayout.CENTER);
-		
-		
-		
+		contain.add(image, BorderLayout.CENTER);
 	}
+	
+	
+
+
 	public void buttonPopulator(){
-		Random r=new Random();
-		Random birdCount=new Random();
-		int randNum=r.nextInt(3);
-		int birdIndex=birdCount.nextInt(birds.size());
-	
-		
-		if(randNum==0){
-			birdBtn1.setText(birds.get(birdIndex).getBirdName());
-		}else if(randNum==1){
-			birdBtn2.setText(birds.get(birdIndex).getBirdName());
-		}else{
-			birdBtn3.setText(birds.get(birdIndex).getBirdName());
+		Random r = new Random();
+		//Random birdCount = new Random();
+		int randBtnChooser = r.nextInt(3);
+		int randOtherIndex1 = r.nextInt(birds.size());
+		while (randOtherIndex1 == index) {
+			randOtherIndex1 = r.nextInt(birds.size());
 		}
+		int randOtherIndex2 = r.nextInt(birds.size());
+		while (randOtherIndex2 == index || randOtherIndex2 == randOtherIndex1) {
+			randOtherIndex2 = r.nextInt(birds.size());
+		}
+		//int birdIndex = birdCount.nextInt(birds.size());
 		
-		
-		
+		if (randBtnChooser == 0) {
+			birdBtn1.setText(currentBird.getBirdName());
+			birdBtn2.setText(birds.get(randOtherIndex1).getBirdName());
+			birdBtn3.setText(birds.get(randOtherIndex2).getBirdName());
+		} else if (randBtnChooser == 1) {
+			birdBtn2.setText(currentBird.getBirdName());
+			birdBtn1.setText(birds.get(randOtherIndex1).getBirdName());
+			birdBtn3.setText(birds.get(randOtherIndex2).getBirdName());			
+		} else {
+			birdBtn3.setText(currentBird.getBirdName());
+			birdBtn1.setText(birds.get(randOtherIndex1).getBirdName());
+			birdBtn2.setText(birds.get(randOtherIndex2).getBirdName());			
+		}
 	}
 	
+	@Override
+
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		//if (sourceButton.getText().equals(CORRECT)) {
+		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
-		//} else {
+		} else {
 			sourceButton.setBackground(Color.RED);
-		//	CORRECT.setBackground(Color.GREEN);
-		//}
+			
+		}
 		index++;
 		currentBird = birds.get(index);
 		if (index == birds.size()) {
