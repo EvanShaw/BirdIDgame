@@ -1,6 +1,6 @@
 public class Bird {
-	String imagePath;
-	String birdName;
+	private String imagePath;
+	private String birdName;
 	
 	public Bird(String imagePath, String birdName) {
 		this.imagePath = imagePath;
@@ -9,5 +9,11 @@ public class Bird {
 	
 	public boolean isMatching(String birdChosen) {
 		return birdName.equals(birdChosen);
+	}
+	public String getBirdName(){
+		return birdName;
+	}
+	public String getImagePath(){
+		return imagePath;
 	}
 }

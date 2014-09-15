@@ -10,25 +10,27 @@ public class GetBirds {
 		ArrayList<Bird> birds = new ArrayList<>();
 		try {
 			Scanner scanner = new Scanner(new File("src/starter_birdlist.csv"));
+			//scanner.nextLine();
 			scanner.useDelimiter(",");
-			scanner.nextLine();
+			
 	        while(scanner.hasNextLine()){
+	        	
 	            birds.add(new Bird(scanner.next(), scanner.next()));
 	        }
-	        scanner.close();
+	       
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println(birds.get(1).birdName + birds.get(1).imagePath);
+		System.out.println(birds.get(1).getBirdName() + birds.get(1).getImagePath());
 		
-		EventQueue.invokeLater(new Runnable() {
+		//EventQueue.invokeLater(new Runnable() {
 
-			public void run() {
-				BirdIdGUI myFrame = new BirdIdGUI();
-				myFrame.setVisible(true);
-			}
-		});
+			//public void run() {
+				//BirdIdGUI myFrame = new BirdIdGUI();
+				//myFrame.setVisible(true);
+			//}
+		//});
 
 	}
 }
