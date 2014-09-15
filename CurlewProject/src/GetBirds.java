@@ -1,4 +1,5 @@
 //import java.awt.EventQueue;
+import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.Scanner;
 
 public class GetBirds {
 	public static void main(String[] args) {
-		ArrayList<Bird> birds = new ArrayList<>();
+		final ArrayList<Bird> birds = new ArrayList<>();
 		try {
 			Scanner scanner = new Scanner(new File("src/starter_birdlist.csv"));
 			scanner.nextLine();
@@ -33,11 +34,11 @@ public class GetBirds {
 		System.out.println(birds.get(6).getBirdName() + " " + birds.get(6).getImagePath());
 		 */
 		
-		//EventQueue.invokeLater(new Runnable() {
-		//	public void run() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
 				BirdIdGUI myFrame = new BirdIdGUI(birds);
 				myFrame.setVisible(true);
-		//	}
-		//});
+		}
+		});
 	}
 }
