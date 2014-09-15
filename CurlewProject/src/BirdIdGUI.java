@@ -64,6 +64,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			sourceButton.setBackground(Color.RED);
 		//	CORRECT.setBackground(Color.GREEN);
 		//}
-			
+		index++;
+		currentBird = birds.get(index);
+		if (index == birds.size()) {
+			//end program
+		}
 	}
 }
