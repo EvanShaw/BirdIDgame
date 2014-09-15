@@ -1,11 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,8 +16,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	JButton birdBtn1;
 	JButton birdBtn2;
 	JButton birdBtn3;
-	
-	
+	JLabel image;
 	
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
@@ -60,14 +55,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birdBtn3.addActionListener(this);
 		
 		//Add images
-		JLabel image = new JLabel();
+		image = new JLabel();
 		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 		image.setHorizontalAlignment(SwingConstants.CENTER);
 		contain.add(image, BorderLayout.CENTER);
 	}
-	
-	
-
 
 	public void buttonPopulator(){
 		Random r = new Random();
@@ -99,7 +91,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	}
 	
 	@Override
-
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
@@ -107,12 +98,24 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			score++;
 		} else {
 			sourceButton.setBackground(Color.RED);
-			
 		}
 		index++;
-		currentBird = birds.get(index);
 		if (index == birds.size()) {
 			//end program
+		} else {
+			pause();
+			currentBird = birds.get(index);
+			image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
+			sourceButton.setBorderPainted(false);
+			buttonPopulator();
+		}
+	}
+	
+	public void pause() {
+		try {
+		    Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
 		}
 	}
 }
