@@ -2,20 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class BirdIdGUI extends JFrame implements ActionListener {
 
 	int score;
 	JLabel scoreLabel;
 	JLabel ImageLabel;
+	ArrayList<Bird> birds;
+	Bird currentBird;
+	int index;
 	
-	public BirdIdGUI() {
-
+	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
 		
 		//setting the fields
 		score = 0;
 		scoreLabel = new JLabel("Score: " + score);
+		this.birds = birds;
+		index = 0;
+		currentBird = birds.get(index);
 		
 		//basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,7 +51,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		//Add images
 		
 		JLabel imageLabel = new JLabel(new ImageIcon());
-		contain.add(imageLabel,BorderLayout.CENTER);
+		contain.add(imageLabel, BorderLayout.CENTER);
 	}
 
 	@Override
@@ -58,5 +64,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			sourceButton.setBackground(Color.RED);
 		//	CORRECT.setBackground(Color.GREEN);
 		//}
+			
 	}
 }
