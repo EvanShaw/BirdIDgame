@@ -98,8 +98,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			sourceButton.setBackground(Color.GREEN);
 			score++;
 			scoreLabel.setText("Score: " + score);
+
 		} else {
 			sourceButton.setBackground(Color.RED);
+			
 		}
 		index++;
 		if (index == birds.size()) {
@@ -110,6 +112,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	}
 	
 	public void endProgram() {
+		
+			scoreLabel.setText("You Answered "+score+"/"+birds.size()+"correctly");
+			
+		
 		
 	}
 	
