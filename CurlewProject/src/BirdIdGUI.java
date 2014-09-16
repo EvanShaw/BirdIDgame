@@ -7,16 +7,16 @@ import java.util.Random;
 
 public class BirdIdGUI extends JFrame implements ActionListener {
 
-	int score;
-	JLabel scoreLabel;
-	JLabel ImageLabel;
-	ArrayList<Bird> birds;
-	Bird currentBird;
-	int index;
+	private int score;
+	private JLabel scoreLabel;
+	private ArrayList<Bird> birds;
+	private Bird currentBird;
+	private int index;
+	//change these buttons to an array of them
 	JButton birdBtn1;
 	JButton birdBtn2;
 	JButton birdBtn3;
-	JLabel image;
+	private JLabel image;
 	
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
@@ -54,7 +54,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birdBtn2.addActionListener(this);
 		birdBtn3.addActionListener(this);
 		
-		//Add images
+		//adding images
 		image = new JLabel();
 		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 		image.setHorizontalAlignment(SwingConstants.CENTER);
@@ -114,18 +114,16 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	}
 	
 	public void resetAfterAction(JButton sourceButton, Color defaultColor) {
-		pause();
-		currentBird = birds.get(index);
-		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
-		sourceButton.setBackground(defaultColor);
-		buttonPopulator();
-	}
-	
-	public void pause() {
-		try {
-			Thread.sleep(3000);
-       	} catch (InterruptedException e) {
-       		e.printStackTrace();
-        }
+		Timer timer = new Timer(3000, new ActionListener() {
+		    public void actionPerformed(ActionEvent event) {
+				currentBird = birds.get(index);
+				image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
+				//sourceButton.setBackground(defaultColor);
+				buttonPopulator();
+		    }
+		});
+		timer.start();
+		timer.setRepeats(false); 
+		timer.stop();
 	}
 }
