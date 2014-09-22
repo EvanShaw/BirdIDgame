@@ -1,0 +1,10 @@
+All bird photographs (with the exception of American Bittern, which is in the public domain) are copyright (2011-2014) Susa Stonedahl, all rights reserved.
+
+A limited license has been granted to the Better Instructional Resource Design Corporation to distribute these photographs along with the educational bird identification software they are developing.  License terms include:
+ (1) This license extends to the contract work performed by A.C.E. Consulting on behalf of B.I.R.D. Corporation.
+ (2) The photographer (Susa Stonedahl) must be clearly attributed in the "about" screen of the software.
+ (3) Additional use of these images outside of the scope of the course project for CSC 285 is not granted.  Usage outside of this scope requires the express written consent of the photographer (contact: susa@stonedahl.com).
+ (4) A copy of this license file (photo_license.txt) must be re-distributed with the photographs.
+
+If you wish to obtain a higher resolution version of a specific photograph (solely for use in this project), they may be downloaded form the photographer's website:  http://susa.stonedahl.com/birds/
+

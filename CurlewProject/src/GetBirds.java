@@ -9,7 +9,7 @@ public class GetBirds {
 		//reading the bird data from the source file and storing into an array of Bird objects
 		final ArrayList<Bird> birds = new ArrayList<>();
 		try {
-			Scanner scanner = new Scanner(new File("src/starter_birdlist.csv"));
+			Scanner scanner = new Scanner(new File("src/stage2_materials/full_birdlist.csv"));
 			scanner.nextLine();
 			String[] splitter = {};
 	        while(scanner.hasNextLine()){
