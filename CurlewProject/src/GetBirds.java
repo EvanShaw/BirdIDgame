@@ -14,7 +14,11 @@ public class GetBirds {
 			String[] splitter = {};
 	        while(scanner.hasNextLine()){
 	        	splitter = scanner.nextLine().split(",");
-		        birds.add(new Bird(splitter[0], splitter[1]));
+	        	String birdName = splitter[0];
+	        	if (!splitter[3].equals("")) {
+	        		 birdName += " (" + splitter[3] + ")";
+	        	}
+		        birds.add(new Bird(birdName, "stage2_materials/photos/" + splitter[2]));
 	        }
 	        scanner.close();
 		} catch(FileNotFoundException e) {
