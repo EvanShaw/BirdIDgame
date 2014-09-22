@@ -119,17 +119,17 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 	}
 	
-	public void resetAfterAction(JButton sourceButton, Color defaultColor) {
-		Timer timer = new Timer(3000, new ActionListener() {
+	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
+		Timer timer = new Timer(2000, new ActionListener() {
 		    public void actionPerformed(ActionEvent event) {
 				currentBird = birds.get(index);
 				image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
-				//sourceButton.setBackground(defaultColor);
+				srcBtn.setBackground(defaultColor);
 				buttonPopulator();
 		    }
 		});
+		timer.setRepeats(false);
 		timer.start();
-		timer.setRepeats(false); 
 		timer.stop();
 	}
 }
