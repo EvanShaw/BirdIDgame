@@ -1,3 +1,5 @@
+//$$ TODO: Class needs commented -- one Javadoc /** */ comment above each class & method.
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

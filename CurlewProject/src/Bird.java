@@ -1,3 +1,5 @@
+//$$ TODO: Class needs commented -- one Javadoc /** */ comment above each class & method.
+
 public class Bird {
 	private String imagePath;
 	private String birdName;

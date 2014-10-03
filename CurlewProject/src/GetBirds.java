@@ -1,3 +1,5 @@
+//$$ TODO: Class needs commented -- one Javadoc /** */ comment above each class & method.
+
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
