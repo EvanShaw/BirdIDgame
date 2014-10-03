@@ -1,5 +1,3 @@
-//$$ TODO: Class needs commented -- one Javadoc /** */ comment above each class & method.
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Creates the GUI for the user to play the game with.
+ */
 public class BirdIdGUI extends JFrame implements ActionListener {
 
 	//$$ TODO: Consider moving the score-keeping (model/data) out to another class/object (thus separating it somewhat from the view/display code)
@@ -65,6 +66,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(image, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Accesses Birds from the list randomly to create the button labels for each question.
+	 */
 	public void buttonPopulator(){
 		//$$ TODO: The following buttonPopulator() code in this method is pretty ugly.
 		//$$    Consider using Java's built-in shuffle() for the birds and/or buttons,
@@ -72,7 +76,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		//$$ TODO: r is not a very good name.  "rand" or "rng" (for random number generator) would be better.  
 		Random r = new Random();
-		//$$ TODO: Get rid of old/crufty commented out code. 
+		//$$ TODO: Get rid of old/crusty commented out code. 
 		//Random birdCount = new Random();
 		int randBtnChooser = r.nextInt(3);
 		int randOtherIndex1 = r.nextInt(birds.size());
@@ -99,8 +103,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			birdBtn2.setText(birds.get(randOtherIndex2).getBirdName());			
 		}
 	}
-	
-	@Override
+
+	/**
+	 * Handles the action listening for all GUI button interaction.
+	 * @Override
+	 */
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
 		Color defaultColor = sourceButton.getBackground();
@@ -120,7 +127,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			resetAfterAction(sourceButton, defaultColor);
 		}
 	}
-	
+
+	/**
+	 * Displays the final result screen of the program after the questions are done.
+	 */
 	public void endProgram() {
 		
 			scoreLabel.setText("You Answered "+score+"/"+birds.size()+"correctly");
@@ -128,13 +138,20 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		
 	}
-	
+
+	/**
+	 * When there are more questions to come, this method resets the screen for the
+	 * new question and calls populate() to re-populate the buttons.
+	 * @params srcBtn, defaultColor - uses the variables from the actionPerformed
+	 * 		method to reset the changed button to its original color
+	 */
 	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
 		Timer timer = new Timer(2000, new ActionListener() {
 		    public void actionPerformed(ActionEvent event) {
 				currentBird = birds.get(index);
 				image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 				srcBtn.setBackground(defaultColor);
+				//TODO set all buttons using data fields to default color, not just source
 				buttonPopulator();
 		    }
 		});

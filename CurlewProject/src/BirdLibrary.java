@@ -1,17 +1,14 @@
-//$$ TODO: Class needs commented -- one Javadoc /** */ comment above each class & method.
-
-import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Reads the bird data from the source files and stores it into an array of Bird objects.
+ * Reads the bird data from the source files and stores it into an ArrayList of Bird objects.
  */
 public class BirdLibrary {
 
-	final ArrayList<Bird> birds;
+	private ArrayList<Bird> birds;
 	
 	public BirdLibrary() {
 		birds = new ArrayList<>();
@@ -32,7 +29,11 @@ public class BirdLibrary {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Allows the main Program class to access the ArrayList of birds.
+	 * @return ArrayList<Bird> birds - the completed Bird list from the file information
+	 */
 	public ArrayList<Bird> getLibrary() {
 		return birds;
 	}

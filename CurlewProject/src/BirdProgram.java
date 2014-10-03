@@ -1,10 +1,15 @@
 import java.awt.EventQueue;
 
-
+/**
+ * The class that runs the program.
+ */
 public class BirdProgram {
 
+	/**
+	 * The main method that is run to create the necessary objects & GUI.
+	 * @param args - no other variables are used directly by the method
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				BirdLibrary library = new BirdLibrary();
@@ -13,5 +18,4 @@ public class BirdProgram {
 		}
 		});
 	}
-
 }
