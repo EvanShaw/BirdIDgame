@@ -16,8 +16,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private Bird currentBird;
 	private int index; //$$ TODO: Not a good intention-revealing variable name.
 
-	//$$ TODO: Change the following to a TODO comment (or actually fix it!)
-	//change these buttons to an array of them
+	//$$ TODO: Change these buttons to an array of them
 	JButton birdBtn1;
 	JButton birdBtn2;
 	JButton birdBtn3;
@@ -26,8 +25,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
 		
-		//$$ TODO: the comment on the line below is a fairly useless one.  Either improve it, or remove it.
-		//setting the fields
 		score = 0;
 		scoreLabel = new JLabel("Score: " + score);
 		//$$ TODO: Why do you use this.birds, but not this.score , this.scoreLabel, etc?  Either works, but be consistent!
