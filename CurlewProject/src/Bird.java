@@ -9,6 +9,8 @@ public class Bird {
 		this.imagePath = imagePath;
 	}
 	
+	//$$ TODO: this method seems reasonable, but what about including a .equals(Object) method
+	//$$ that compares Bird objects with each other, based on their name?  (Debatable... but consider whether this would be useful or not.)
 	public boolean isMatching(String birdChosen) {
 		return birdName.equals(birdChosen);
 	}

@@ -9,23 +9,28 @@ import java.util.Random;
 
 public class BirdIdGUI extends JFrame implements ActionListener {
 
+	//$$ TODO: Consider moving the score-keeping (model/data) out to another class/object (thus separating it somewhat from the view/display code)
 	private int score;
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
-	private int index;
+	private int index; //$$ TODO: Not a good intention-revealing variable name.
+
+	//$$ TODO: Change the following to a TODO comment (or actually fix it!)
 	//change these buttons to an array of them
 	JButton birdBtn1;
 	JButton birdBtn2;
 	JButton birdBtn3;
-	private JLabel image;
+	private JLabel image;  //$$ TODO: potentially confusing name, since it's not of type Image -- consider "imageLabel"?
 	
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
 		
+		//$$ TODO: the comment on the line below is a fairly useless one.  Either improve it, or remove it.
 		//setting the fields
 		score = 0;
 		scoreLabel = new JLabel("Score: " + score);
+		//$$ TODO: Why do you use this.birds, but not this.score , this.scoreLabel, etc?  Either works, but be consistent!
 		this.birds = birds;
 		index = 0;
 		currentBird = birds.get(index);
@@ -64,7 +69,13 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	}
 
 	public void buttonPopulator(){
+		//$$ TODO: The following buttonPopulator() code in this method is pretty ugly.
+		//$$    Consider using Java's built-in shuffle() for the birds and/or buttons,
+		//$$    -- for the birds, you could just take the first N birds, after shuffling...
+		
+		//$$ TODO: r is not a very good name.  "rand" or "rng" (for random number generator) would be better.  
 		Random r = new Random();
+		//$$ TODO: Get rid of old/crufty commented out code. 
 		//Random birdCount = new Random();
 		int randBtnChooser = r.nextInt(3);
 		int randOtherIndex1 = r.nextInt(birds.size());
