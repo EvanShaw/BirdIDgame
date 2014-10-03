@@ -21,6 +21,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	JButton birdBtn1;
 	JButton birdBtn2;
 	JButton birdBtn3;
+	JButton birdBtn4;
+	JButton birdBtn5;
+	JButton[] buttons;
 	private JLabel image;  //$$ TODO: potentially confusing name, since it's not of type Image -- consider "imageLabel"?
 	
 	public BirdIdGUI(ArrayList<Bird> birds) {
@@ -32,6 +35,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		this.birds = birds;
 		index = 0;
 		currentBird = birds.get(index);
+		buttons = new JButton[5];
 		
 		//basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,22 +46,24 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.setLayout(new BorderLayout());
 		JPanel southButtonPanel = new JPanel(new FlowLayout());
 		contain.add(southButtonPanel, BorderLayout.SOUTH);
-		
 		contain.add(scoreLabel, BorderLayout.NORTH);
 
 		//creating the buttons
 		birdBtn1 = new JButton();
 		birdBtn2 = new JButton();
 		birdBtn3 = new JButton();
+		birdBtn4 = new JButton();
+		birdBtn5 = new JButton();
+		buttons[0] = birdBtn1;
+		buttons[1] = birdBtn2;
+		buttons[2] = birdBtn3;
+		buttons[3] = birdBtn4;
+		buttons[4] = birdBtn5;
 		buttonPopulator();
-		southButtonPanel.add(birdBtn1);
-		southButtonPanel.add(birdBtn2);
-		southButtonPanel.add(birdBtn3);
-
-		//adding listeners to buttons
-		birdBtn1.addActionListener(this);
-		birdBtn2.addActionListener(this);
-		birdBtn3.addActionListener(this);
+		for (int i = 0; i < 5; i++) {
+			southButtonPanel.add(buttons[i]);
+			buttons[i].addActionListener(this);
+		}
 		
 		//adding images
 		image = new JLabel();
@@ -90,17 +96,17 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		//int birdIndex = birdCount.nextInt(birds.size());
 		
 		if (randBtnChooser == 0) {
-			birdBtn1.setText(currentBird.getBirdName());
-			birdBtn2.setText(birds.get(randOtherIndex1).getBirdName());
-			birdBtn3.setText(birds.get(randOtherIndex2).getBirdName());
+			buttons[0].setText(currentBird.getBirdName());
+			buttons[1].setText(birds.get(randOtherIndex1).getBirdName());
+			buttons[2].setText(birds.get(randOtherIndex2).getBirdName());
 		} else if (randBtnChooser == 1) {
-			birdBtn2.setText(currentBird.getBirdName());
-			birdBtn1.setText(birds.get(randOtherIndex1).getBirdName());
-			birdBtn3.setText(birds.get(randOtherIndex2).getBirdName());			
+			buttons[1].setText(currentBird.getBirdName());
+			buttons[0].setText(birds.get(randOtherIndex1).getBirdName());
+			buttons[2].setText(birds.get(randOtherIndex2).getBirdName());			
 		} else {
-			birdBtn3.setText(currentBird.getBirdName());
-			birdBtn1.setText(birds.get(randOtherIndex1).getBirdName());
-			birdBtn2.setText(birds.get(randOtherIndex2).getBirdName());			
+			buttons[2].setText(currentBird.getBirdName());
+			buttons[0].setText(birds.get(randOtherIndex1).getBirdName());
+			buttons[1].setText(birds.get(randOtherIndex2).getBirdName());			
 		}
 	}
 
