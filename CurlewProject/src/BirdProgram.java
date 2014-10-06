@@ -12,13 +12,8 @@ public class BirdProgram {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				BirdLibrary library = new BirdLibrary();
-				
-				/* TODO Send in easy as default difficulty at the moment. Introduction of users and a welcome screen
-				   should remedy this. */
-				Difficulty chosenDifficulty = new Difficulty("easy");
-				BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), chosenDifficulty);
-				myFrame.setVisible(true);
+				StartScreen startScreen = new StartScreen();
+				startScreen.setVisible(true);
 		}
 		});
 	}

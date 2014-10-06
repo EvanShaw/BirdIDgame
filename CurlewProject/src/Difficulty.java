@@ -3,27 +3,32 @@
  * a given user will be provided for a given session 
  */
 public class Difficulty {
-	int numOfButtons;
-	int numOfPictures;
-	String difficulty;
+	private int numOfButtons;
+	private int numOfPictures;
+	private String difficulty;
 	
 	/**
-	 * The number of buttons and number of pictures is determined by what difficulty the user sends in
-	 * @param difficulty
+	 * Initialize the difficulty to easy by default
 	 */
-	public Difficulty(String difficulty) {
-		this.difficulty = difficulty;
-		if (difficulty.equalsIgnoreCase("Easy")) {
-			numOfButtons = 3;
-			numOfPictures = 20;
-		} else if (difficulty.equalsIgnoreCase("Hard")) {
-			numOfButtons = 5; 
-			numOfPictures = 40;
-		} else {
-			numOfButtons = 3;
-			numOfPictures = 20;
-		}
+	public Difficulty() {
+		this.difficulty = "easy";
+		numOfButtons = 3;
+		numOfPictures = 20;
 		
+	}
+	public void setDifficulty(String difficulty) {
+		if (difficulty.equalsIgnoreCase("easy")) {
+			difficulty = "Easy";
+			numOfButtons = 3;
+			numOfPictures = 20;
+		} else if (difficulty.equalsIgnoreCase("hard")) {
+			difficulty = "Hard";
+			numOfButtons = 5;
+			numOfPictures = 40;
+		}
+	}
+	public String getDifficulty() {
+		return difficulty;
 	}
 	public int getNumButtons() {
 		return numOfButtons;
