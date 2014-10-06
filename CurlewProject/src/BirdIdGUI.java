@@ -10,8 +10,7 @@ import java.util.Random;
  */
 public class BirdIdGUI extends JFrame implements ActionListener {
 
-	//$$ TODO: Consider moving the score-keeping (model/data) out to another class/object (thus separating it somewhat from the view/display code)
-	private int score;
+	private Score sessionScore = new Score();
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
@@ -29,8 +28,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
 		
-		score = 0;
-		scoreLabel = new JLabel("Score: " + score);
+		
+		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
 		//$$ TODO: Why do you use this.birds, but not this.score , this.scoreLabel, etc?  Either works, but be consistent!
 		this.birds = birds;
 		index = 0;
@@ -119,8 +118,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		Color defaultColor = sourceButton.getBackground();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
-			score++;
-			scoreLabel.setText("Score: " + score);
+			sessionScore.incrementScore();
+			scoreLabel.setText("Score: " + sessionScore.getScore());
 
 		} else {
 			sourceButton.setBackground(Color.RED);
@@ -139,7 +138,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 		
-			scoreLabel.setText("You Answered "+score+"/"+birds.size()+"correctly");
+			scoreLabel.setText("You Answered "+sessionScore.getScore()+"/"+birds.size()+"correctly");
 			
 		
 		
