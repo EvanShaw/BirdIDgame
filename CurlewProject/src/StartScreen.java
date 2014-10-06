@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 public class StartScreen extends JFrame implements ActionListener{
 
-	// fields
 	private User user;
 	private Difficulty chosenDifficulty;
 	private JButton logIn;

@@ -10,15 +10,24 @@ public class Bird {
 		this.imagePath = imagePath;
 	}
 	
-	//$$ TODO: this method seems reasonable, but what about including a .equals(Object) method
-	//$$ that compares Bird objects with each other, based on their name?  (Debatable... but consider whether this would be useful or not.)
 	/**
-	 * Checks whether the bird name sent in is the same as the current Bird object.
-	 * @param birdChosen
-	 * @return result of String equals method on the two Strings as boolean
+	 * Compares bird object with obj
+	 * @param obj
+	 * @return boolean
 	 */
-	public boolean isMatching(String birdChosen) {
-		return birdName.equals(birdChosen);
+	
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		} 
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() == obj.getClass()) {
+			Bird other = (Bird) obj;
+			return this.imagePath.equals(other.imagePath) && this.birdName.equals(other.birdName); 
+		}
+		return false;
 	}
 
 	/**

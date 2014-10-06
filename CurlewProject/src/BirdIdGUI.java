@@ -1,8 +1,10 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -16,13 +18,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
 	private int birdListIndex; 
-	
-	JButton[] buttons;
+	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;  
-	
-	/* TODO: chosenDifficulty.getNumButtons() is unusable at the moment. We need to figure how to only create a 
-	 * certain number of buttons... 
-	 */
 	   
 	public BirdIdGUI(ArrayList<Bird> birds, Difficulty chosenDifficulty) {
 		super("BirdIdGUI");
@@ -33,7 +30,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
 		birdListIndex = 0;
 		currentBird = birds.get(birdListIndex);
-		buttons = new JButton[5];
+		buttons = new ArrayList<JButton>();
 		
 		//basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -47,63 +44,44 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(scoreLabel, BorderLayout.NORTH);
 
 		//creating the buttons
-		JButton birdBtn1 = new JButton();
-		JButton birdBtn2 = new JButton();
-		JButton birdBtn3 = new JButton();
-		JButton birdBtn4 = new JButton();
-		JButton birdBtn5 = new JButton();
 		
-		buttons[0] = birdBtn1;
-		buttons[1] = birdBtn2;
-		buttons[2] = birdBtn3;
-		buttons[3] = birdBtn4;
-		buttons[4] = birdBtn5;
+		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
+			buttons.add(new JButton());
+			southButtonPanel.add(buttons.get(i));
+			buttons.get(i).addActionListener(this);
+		}
 		
 		buttonPopulator();
-		
-		for (int i = 0; i < 5; i++) {
-			southButtonPanel.add(buttons[i]);
-			buttons[i].addActionListener(this);
-		}
 		
 		//adding images
 		imageLabel = new JLabel();
 		imageLabel.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contain.add(imageLabel, BorderLayout.CENTER);
+		this.validate();
 	}
 
 	/**
 	 * Accesses Birds from the list randomly to create the button labels for each question.
 	 */
 	public void buttonPopulator(){
-		//$$ TODO: The following buttonPopulator() code in this method is pretty ugly.
-		//$$    Consider using Java's built-in shuffle() for the birds and/or buttons,
-		//$$    -- for the birds, you could just take the first N birds, after shuffling...
-		 
+		
 		Random rand = new Random();
-		int randBtnChooser = rand.nextInt(3);
-		int randOtherIndex1 = rand.nextInt(birds.size());
-		while (randOtherIndex1 == birdListIndex) {
-			randOtherIndex1 = rand.nextInt(birds.size());
-		}
-		int randOtherIndex2 = rand.nextInt(birds.size());
-		while (randOtherIndex2 == birdListIndex || randOtherIndex2 == randOtherIndex1) {
-			randOtherIndex2 = rand.nextInt(birds.size());
+		int correctButton = rand.nextInt(chosenDifficulty.getNumButtons());
+		
+		boolean containsAnswer = false;
+		Collections.shuffle(birds);
+		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
+			if (!birds.get(i).equals(currentBird)) {
+				buttons.get(i).setText(birds.get(i).getBirdName());
+			} else {
+				buttons.get(i).setText(birds.get(i).getBirdName());
+				containsAnswer = true;
+			}
 		}
 		
-		if (randBtnChooser == 0) {
-			buttons[0].setText(currentBird.getBirdName());
-			buttons[1].setText(birds.get(randOtherIndex1).getBirdName());
-			buttons[2].setText(birds.get(randOtherIndex2).getBirdName());
-		} else if (randBtnChooser == 1) {
-			buttons[1].setText(currentBird.getBirdName());
-			buttons[0].setText(birds.get(randOtherIndex1).getBirdName());
-			buttons[2].setText(birds.get(randOtherIndex2).getBirdName());			
-		} else {
-			buttons[2].setText(currentBird.getBirdName());
-			buttons[0].setText(birds.get(randOtherIndex1).getBirdName());
-			buttons[1].setText(birds.get(randOtherIndex2).getBirdName());			
+		if (!containsAnswer) {
+			buttons.get(correctButton).setText(currentBird.getBirdName());
 		}
 	}
 
