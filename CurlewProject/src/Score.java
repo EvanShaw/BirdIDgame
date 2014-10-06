@@ -1,4 +1,6 @@
-
+/**
+ * A score object that keeps track of a users score
+ */
 public class Score {
 	private int score;
 	

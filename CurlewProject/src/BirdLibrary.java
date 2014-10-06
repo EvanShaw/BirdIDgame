@@ -22,7 +22,7 @@ public class BirdLibrary {
 	        	if (!splitStrings[3].equals("")) {
 	        		 birdName += " (" + splitStrings[3] + ")";
 	        	}
-		        birds.add(new Bird(birdName, "stage2_materials/photos/" + splitStrings[2]));
+		        birds.add(new Bird(birdName, "stage2_materials.photos/" + splitStrings[2]));
 	        }
 	        scanner.close();
 		} catch(FileNotFoundException e) {

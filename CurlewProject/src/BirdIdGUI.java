@@ -10,30 +10,29 @@ import java.util.Random;
  */
 public class BirdIdGUI extends JFrame implements ActionListener {
 
-	private Score sessionScore = new Score();
+	private Score sessionScore;
+	private Difficulty chosenDifficulty;
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
-	private int index; //$$ TODO: Not a good intention-revealing variable name.
-
-	//$$ TODO: Change these buttons to an array of them
-	JButton birdBtn1;
-	JButton birdBtn2;
-	JButton birdBtn3;
-	JButton birdBtn4;
-	JButton birdBtn5;
-	JButton[] buttons;
-	private JLabel image;  //$$ TODO: potentially confusing name, since it's not of type Image -- consider "imageLabel"?
+	private int birdListIndex; 
 	
-	public BirdIdGUI(ArrayList<Bird> birds) {
+	JButton[] buttons;
+	private JLabel imageLabel;  
+	
+	/* TODO: chosenDifficulty.getNumButtons() is unusable at the moment. We need to figure how to only create a 
+	 * certain number of buttons... 
+	 */
+	   
+	public BirdIdGUI(ArrayList<Bird> birds, Difficulty chosenDifficulty) {
 		super("BirdIdGUI");
 		
-		
-		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
-		//$$ TODO: Why do you use this.birds, but not this.score , this.scoreLabel, etc?  Either works, but be consistent!
 		this.birds = birds;
-		index = 0;
-		currentBird = birds.get(index);
+		this.chosenDifficulty = chosenDifficulty;
+		sessionScore = new Score();
+		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
+		birdListIndex = 0;
+		currentBird = birds.get(birdListIndex);
 		buttons = new JButton[5];
 		
 		//basic window operations
@@ -48,27 +47,30 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(scoreLabel, BorderLayout.NORTH);
 
 		//creating the buttons
-		birdBtn1 = new JButton();
-		birdBtn2 = new JButton();
-		birdBtn3 = new JButton();
-		birdBtn4 = new JButton();
-		birdBtn5 = new JButton();
+		JButton birdBtn1 = new JButton();
+		JButton birdBtn2 = new JButton();
+		JButton birdBtn3 = new JButton();
+		JButton birdBtn4 = new JButton();
+		JButton birdBtn5 = new JButton();
+		
 		buttons[0] = birdBtn1;
 		buttons[1] = birdBtn2;
 		buttons[2] = birdBtn3;
 		buttons[3] = birdBtn4;
 		buttons[4] = birdBtn5;
+		
 		buttonPopulator();
+		
 		for (int i = 0; i < 5; i++) {
 			southButtonPanel.add(buttons[i]);
 			buttons[i].addActionListener(this);
 		}
 		
 		//adding images
-		image = new JLabel();
-		image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
-		image.setHorizontalAlignment(SwingConstants.CENTER);
-		contain.add(image, BorderLayout.CENTER);
+		imageLabel = new JLabel();
+		imageLabel.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
+		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		contain.add(imageLabel, BorderLayout.CENTER);
 	}
 
 	/**
@@ -78,21 +80,17 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		//$$ TODO: The following buttonPopulator() code in this method is pretty ugly.
 		//$$    Consider using Java's built-in shuffle() for the birds and/or buttons,
 		//$$    -- for the birds, you could just take the first N birds, after shuffling...
-		
-		//$$ TODO: r is not a very good name.  "rand" or "rng" (for random number generator) would be better.  
-		Random r = new Random();
-		//$$ TODO: Get rid of old/crusty commented out code. 
-		//Random birdCount = new Random();
-		int randBtnChooser = r.nextInt(3);
-		int randOtherIndex1 = r.nextInt(birds.size());
-		while (randOtherIndex1 == index) {
-			randOtherIndex1 = r.nextInt(birds.size());
+		 
+		Random rand = new Random();
+		int randBtnChooser = rand.nextInt(3);
+		int randOtherIndex1 = rand.nextInt(birds.size());
+		while (randOtherIndex1 == birdListIndex) {
+			randOtherIndex1 = rand.nextInt(birds.size());
 		}
-		int randOtherIndex2 = r.nextInt(birds.size());
-		while (randOtherIndex2 == index || randOtherIndex2 == randOtherIndex1) {
-			randOtherIndex2 = r.nextInt(birds.size());
+		int randOtherIndex2 = rand.nextInt(birds.size());
+		while (randOtherIndex2 == birdListIndex || randOtherIndex2 == randOtherIndex1) {
+			randOtherIndex2 = rand.nextInt(birds.size());
 		}
-		//int birdIndex = birdCount.nextInt(birds.size());
 		
 		if (randBtnChooser == 0) {
 			buttons[0].setText(currentBird.getBirdName());
@@ -123,10 +121,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 
 		} else {
 			sourceButton.setBackground(Color.RED);
-			
+				
 		}
-		index++;
-		if (index == birds.size()) {
+		birdListIndex++;
+		if (birdListIndex == chosenDifficulty.getNumPictures()) {
 			endProgram();
 		} else {
 			resetAfterAction(sourceButton, defaultColor);
@@ -138,10 +136,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 		
-			scoreLabel.setText("You Answered "+sessionScore.getScore()+"/"+birds.size()+"correctly");
+			scoreLabel.setText("You Answered "+sessionScore.getScore()+"/"+chosenDifficulty.getNumPictures()+"correctly");
 			
-		
-		
 	}
 
 	/**
@@ -153,8 +149,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
 		Timer timer = new Timer(2000, new ActionListener() {
 		    public void actionPerformed(ActionEvent event) {
-				currentBird = birds.get(index);
-				image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
+				currentBird = birds.get(birdListIndex);
+				imageLabel.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 				srcBtn.setBackground(defaultColor);
 				//TODO set all buttons using data fields to default color, not just source
 				buttonPopulator();
