@@ -1,5 +1,3 @@
-//$$ TODO: Class needs commented -- one Javadoc /** */ comment above each class & method.
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,33 +5,36 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Creates the GUI for the user to play the game with.
+ */
 public class BirdIdGUI extends JFrame implements ActionListener {
 
-	//$$ TODO: Consider moving the score-keeping (model/data) out to another class/object (thus separating it somewhat from the view/display code)
-	private int score;
+	private Score sessionScore = new Score();
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
 	private int index; //$$ TODO: Not a good intention-revealing variable name.
 
-	//$$ TODO: Change the following to a TODO comment (or actually fix it!)
-	//change these buttons to an array of them
+	//$$ TODO: Change these buttons to an array of them
 	JButton birdBtn1;
 	JButton birdBtn2;
 	JButton birdBtn3;
+	JButton birdBtn4;
+	JButton birdBtn5;
+	JButton[] buttons;
 	private JLabel image;  //$$ TODO: potentially confusing name, since it's not of type Image -- consider "imageLabel"?
 	
 	public BirdIdGUI(ArrayList<Bird> birds) {
 		super("BirdIdGUI");
 		
-		//$$ TODO: the comment on the line below is a fairly useless one.  Either improve it, or remove it.
-		//setting the fields
-		score = 0;
-		scoreLabel = new JLabel("Score: " + score);
+		
+		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
 		//$$ TODO: Why do you use this.birds, but not this.score , this.scoreLabel, etc?  Either works, but be consistent!
 		this.birds = birds;
 		index = 0;
 		currentBird = birds.get(index);
+		buttons = new JButton[5];
 		
 		//basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,22 +45,24 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.setLayout(new BorderLayout());
 		JPanel southButtonPanel = new JPanel(new FlowLayout());
 		contain.add(southButtonPanel, BorderLayout.SOUTH);
-		
 		contain.add(scoreLabel, BorderLayout.NORTH);
 
 		//creating the buttons
 		birdBtn1 = new JButton();
 		birdBtn2 = new JButton();
 		birdBtn3 = new JButton();
+		birdBtn4 = new JButton();
+		birdBtn5 = new JButton();
+		buttons[0] = birdBtn1;
+		buttons[1] = birdBtn2;
+		buttons[2] = birdBtn3;
+		buttons[3] = birdBtn4;
+		buttons[4] = birdBtn5;
 		buttonPopulator();
-		southButtonPanel.add(birdBtn1);
-		southButtonPanel.add(birdBtn2);
-		southButtonPanel.add(birdBtn3);
-
-		//adding listeners to buttons
-		birdBtn1.addActionListener(this);
-		birdBtn2.addActionListener(this);
-		birdBtn3.addActionListener(this);
+		for (int i = 0; i < 5; i++) {
+			southButtonPanel.add(buttons[i]);
+			buttons[i].addActionListener(this);
+		}
 		
 		//adding images
 		image = new JLabel();
@@ -68,6 +71,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		contain.add(image, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Accesses Birds from the list randomly to create the button labels for each question.
+	 */
 	public void buttonPopulator(){
 		//$$ TODO: The following buttonPopulator() code in this method is pretty ugly.
 		//$$    Consider using Java's built-in shuffle() for the birds and/or buttons,
@@ -75,7 +81,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		
 		//$$ TODO: r is not a very good name.  "rand" or "rng" (for random number generator) would be better.  
 		Random r = new Random();
-		//$$ TODO: Get rid of old/crufty commented out code. 
+		//$$ TODO: Get rid of old/crusty commented out code. 
 		//Random birdCount = new Random();
 		int randBtnChooser = r.nextInt(3);
 		int randOtherIndex1 = r.nextInt(birds.size());
@@ -89,28 +95,31 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		//int birdIndex = birdCount.nextInt(birds.size());
 		
 		if (randBtnChooser == 0) {
-			birdBtn1.setText(currentBird.getBirdName());
-			birdBtn2.setText(birds.get(randOtherIndex1).getBirdName());
-			birdBtn3.setText(birds.get(randOtherIndex2).getBirdName());
+			buttons[0].setText(currentBird.getBirdName());
+			buttons[1].setText(birds.get(randOtherIndex1).getBirdName());
+			buttons[2].setText(birds.get(randOtherIndex2).getBirdName());
 		} else if (randBtnChooser == 1) {
-			birdBtn2.setText(currentBird.getBirdName());
-			birdBtn1.setText(birds.get(randOtherIndex1).getBirdName());
-			birdBtn3.setText(birds.get(randOtherIndex2).getBirdName());			
+			buttons[1].setText(currentBird.getBirdName());
+			buttons[0].setText(birds.get(randOtherIndex1).getBirdName());
+			buttons[2].setText(birds.get(randOtherIndex2).getBirdName());			
 		} else {
-			birdBtn3.setText(currentBird.getBirdName());
-			birdBtn1.setText(birds.get(randOtherIndex1).getBirdName());
-			birdBtn2.setText(birds.get(randOtherIndex2).getBirdName());			
+			buttons[2].setText(currentBird.getBirdName());
+			buttons[0].setText(birds.get(randOtherIndex1).getBirdName());
+			buttons[1].setText(birds.get(randOtherIndex2).getBirdName());			
 		}
 	}
-	
-	@Override
+
+	/**
+	 * Handles the action listening for all GUI button interaction.
+	 * @Override
+	 */
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
 		Color defaultColor = sourceButton.getBackground();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
-			score++;
-			scoreLabel.setText("Score: " + score);
+			sessionScore.incrementScore();
+			scoreLabel.setText("Score: " + sessionScore.getScore());
 
 		} else {
 			sourceButton.setBackground(Color.RED);
@@ -123,21 +132,31 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			resetAfterAction(sourceButton, defaultColor);
 		}
 	}
-	
+
+	/**
+	 * Displays the final result screen of the program after the questions are done.
+	 */
 	public void endProgram() {
 		
-			scoreLabel.setText("You Answered "+score+"/"+birds.size()+"correctly");
+			scoreLabel.setText("You Answered "+sessionScore.getScore()+"/"+birds.size()+"correctly");
 			
 		
 		
 	}
-	
+
+	/**
+	 * When there are more questions to come, this method resets the screen for the
+	 * new question and calls populate() to re-populate the buttons.
+	 * @params srcBtn, defaultColor - uses the variables from the actionPerformed
+	 * 		method to reset the changed button to its original color
+	 */
 	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
 		Timer timer = new Timer(2000, new ActionListener() {
 		    public void actionPerformed(ActionEvent event) {
 				currentBird = birds.get(index);
 				image.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 				srcBtn.setBackground(defaultColor);
+				//TODO set all buttons using data fields to default color, not just source
 				buttonPopulator();
 		    }
 		});
