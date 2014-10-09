@@ -40,10 +40,11 @@ public class StartScreen extends JFrame implements ActionListener{
 		contain.add(difficultyPanel, BorderLayout.SOUTH);
 		//contain.add(newUser, BorderLayout.NORTH);
 		contain.add(enterUserName, BorderLayout.CENTER);
-		contain.add(userName, BorderLayout.NORTH);
+		contain.add(logIn, BorderLayout.NORTH);
 		difficultyPanel.add(easy);
 		difficultyPanel.add(hard);
 		
+		logIn.addActionListener(this);
 		easy.addActionListener(this);
 		hard.addActionListener(this);
 	}
@@ -51,8 +52,13 @@ public class StartScreen extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		chosenDifficulty.setDifficulty(sourceButton.getText());
-		
+		if (event.getSource().equals(easy) || event.getSource().equals(hard)) {
+			chosenDifficulty.setDifficulty(sourceButton.getText());
+		}
+		if (event.getSource().equals(logIn)) {
+			
+		}
+	
 		/* TODO: Temporary invocation of BirdIdGUI. Ideally we want only the user fields and information to appear 
 		 * first, then after the user information is entered, a box asking the user what difficulty they would
 		 * like will display, and then THAT will invoke BirdIdGUI.
