@@ -25,6 +25,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public BirdIdGUI(ArrayList<Bird> birds, Difficulty chosenDifficulty) {
 		super("BirdIdGUI");
 		
+		Collections.shuffle(birds);
+		
 		this.birds = birds;
 		this.chosenDifficulty = chosenDifficulty;
 		sessionScore = new Score();
@@ -71,7 +73,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		int correctButton = rand.nextInt(chosenDifficulty.getNumButtons());
 		
 		boolean containsAnswer = false;
-		Collections.shuffle(birds);
 		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
 			if (!birds.get(i).equals(currentBird)) {
 				buttons.get(i).setText(birds.get(i).getBirdName());
@@ -132,6 +133,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 				imageLabel.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 				srcBtn.setBackground(defaultColor);
 				//TODO set all buttons using data fields to default color, not just source
+				Collections.shuffle(birds);
 				buttonPopulator();
 		    }
 		});

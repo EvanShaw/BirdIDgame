@@ -12,54 +12,49 @@ public class DifficultyGui extends JFrame implements ActionListener {
 	 */
 	private JButton easy;
 	private JButton hard;
-	private Difficulty difficult;
+	private Difficulty difficulty;
 
-	
-	public DifficultyGui(){
-		super("DifficultyGui");	
-		this.setSize(200,100);
-
-
-	
+	public DifficultyGui() {
+		super("DifficultyGui");
+		this.setSize(200, 100);
 
 		this.setLayout(new BorderLayout());
 
-		easy=new JButton("Easy");
-		hard=new JButton("Hard");
-		difficult=new Difficulty();
-		this.add(new JLabel("Choose Difficulty:"),BorderLayout.NORTH);
-		JPanel south= new JPanel(new FlowLayout());
-		
+		easy = new JButton("Easy");
+		hard = new JButton("Hard");
+		difficulty = new Difficulty();
+		this.add(new JLabel("Choose Difficulty:"), BorderLayout.NORTH);
+		JPanel south = new JPanel(new FlowLayout());
 
 		easy = new JButton("Easy");
 		hard = new JButton("Hard");
-		difficult = new Difficulty();
+		difficulty = new Difficulty();
 		this.add(new JLabel("Choose Difficulty:"), BorderLayout.NORTH);
-		
 
 		south.add(easy);
 		south.add(hard);
+		easy.addActionListener(this);
+		hard.addActionListener(this);
+		
 		this.add(south, BorderLayout.SOUTH);
 
 	}
-	//public static void main(String[] args) {
-		//DifficultyGui gui= new DifficultyGui();
-		//gui.setVisible(true);
-	//}
+
+	// public static void main(String[] args) {
+	// DifficultyGui gui= new DifficultyGui();
+	// gui.setVisible(true);
+	// }
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
+		difficulty.setDifficulty(sourceButton.getText());
 
-				difficult.setDifficulty(sourceButton.getText());
-			
-		
-			BirdLibrary library = new BirdLibrary();
-				BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(),difficult);
-				myFrame.setVisible(true);
-		
+		BirdLibrary library = new BirdLibrary();
+		BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), difficulty);
+		myFrame.setVisible(true);
 
-		difficult.setDifficulty(sourceButton.getText());
+		difficulty.setDifficulty(sourceButton.getText());
 
 		/*
 		 * TODO: Temporary invocation of BirdIdGUI. Ideally we want only the
@@ -67,8 +62,6 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		 * information is entered, a box asking the user what difficulty they
 		 * would like will display, and then THAT will invoke BirdIdGUI.
 		 */
-		
-
 
 	}
 
