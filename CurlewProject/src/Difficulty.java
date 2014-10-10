@@ -4,7 +4,7 @@
  */
 public class Difficulty {
 	private int numOfButtons;
-	private int numOfPictures;
+	private int numOfQuestions;
 	private String difficulty;
 	
 	/**
@@ -13,18 +13,22 @@ public class Difficulty {
 	public Difficulty() {
 		this.difficulty = "easy";
 		numOfButtons = 3;
-		numOfPictures = 20;
+		numOfQuestions = 20;
 		
 	}
 	public void setDifficulty(String difficulty) {
 		if (difficulty.equalsIgnoreCase("easy")) {
 			difficulty = "Easy";
 			numOfButtons = 3;
-			numOfPictures = 20;
+			numOfQuestions = 20;
+		} else if (difficulty.equalsIgnoreCase("medium")) {
+			difficulty = "Medium";
+			numOfButtons = 4;
+			numOfQuestions = 30;
 		} else if (difficulty.equalsIgnoreCase("hard")) {
 			difficulty = "Hard";
 			numOfButtons = 5;
-			numOfPictures = 40;
+			numOfQuestions = 40;
 		}
 	}
 	public String getDifficulty() {
@@ -33,7 +37,7 @@ public class Difficulty {
 	public int getNumButtons() {
 		return numOfButtons;
 	}
-	public int getNumPictures() {
-		return numOfPictures;
+	public int getNumQuestions() {
+		return numOfQuestions;
 	}
 }

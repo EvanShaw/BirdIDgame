@@ -10,7 +10,7 @@ public class User {
 	
 	public User() {
 	}
-	public User(String userName) {
+	public void createNewUser(String newUser) {
 		this.userName = userName;
 		
 		try {
@@ -35,9 +35,6 @@ public class User {
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-	public void createNewUser(String newUser) {
-		
 	}
 	public String getUserName() {
 		return userName;
