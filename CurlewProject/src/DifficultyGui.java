@@ -15,7 +15,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 	private Difficulty difficulty;
 
 	public DifficultyGui() {
-		super("DifficultyGui");
+		super("Choose Diffiuclty");
 		this.setSize(200, 100);
 
 		this.setLayout(new BorderLayout());
@@ -40,10 +40,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 
 	}
 
-	// public static void main(String[] args) {
-	// DifficultyGui gui= new DifficultyGui();
-	// gui.setVisible(true);
-	// }
+
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -54,14 +51,6 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), difficulty);
 		myFrame.setVisible(true);
 
-		difficulty.setDifficulty(sourceButton.getText());
-
-		/*
-		 * TODO: Temporary invocation of BirdIdGUI. Ideally we want only the
-		 * user fields and information to appear first, then after the user
-		 * information is entered, a box asking the user what difficulty they
-		 * would like will display, and then THAT will invoke BirdIdGUI.
-		 */
 
 	}
 
