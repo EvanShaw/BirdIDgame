@@ -15,7 +15,7 @@ public class StartScreen extends JFrame implements ActionListener {
 	private JLabel enterUserName;
 
 	public StartScreen() {
-		super("StartScreen");
+		super("Bird Identification Quiz");
 
 		user = new User();
 		chosenDifficulty = new Difficulty();
@@ -57,10 +57,11 @@ public class StartScreen extends JFrame implements ActionListener {
 
 		if (sourceButton == logIn) {
 			/*
-			 * TODO some sort of check to make sure it is saved
+			 * TODO some sort of check to make sure it is saved in the user file
 			 */
 			
 			DifficultyGui setDifficulty = new DifficultyGui();
+			setDifficulty.setVisible(true);
 		} else {
 			
 		}
