@@ -2,18 +2,27 @@
  * A score object that keeps track of a users score
  */
 public class Score {
-	private int score;
+	private int numCorrectAnswers;
+	private int numQuestions;
+	private String totalScore;
 	
-	public Score() {
-		score = 0;
+	public Score(int numCorrectAnswers, int numQuestions) {
+		this.numCorrectAnswers = numCorrectAnswers;
+		this.numQuestions = numQuestions;
+		totalScore = numCorrectAnswers + "/" + numQuestions;
 	}
 	public void incrementScore() {
-		score++;
+		numCorrectAnswers++;
 	}
-	public void setScore(int score) {
-		this.score = score;
+	public void addToTotalScore(int sessionScore, int sessionNumQuestions) {
+		numCorrectAnswers += sessionScore;
+		numQuestions += sessionNumQuestions;
+		totalScore = numCorrectAnswers + "/" + numQuestions;
 	}
-	public int getScore() {
-		return score;
+	public int getNumCorrectAnswers() {
+		return numCorrectAnswers;
+	}
+	public String getTotalScore() {
+		return totalScore;
 	}
 }

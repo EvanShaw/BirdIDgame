@@ -6,8 +6,7 @@ import java.awt.event.ActionListener;
 
 public class StartScreen extends JFrame implements ActionListener {
 		//fields
-	private User user;
-	private Difficulty chosenDifficulty;
+	private User theUser;
 	private JButton logIn;
 	private JButton newUser;
 
@@ -17,8 +16,8 @@ public class StartScreen extends JFrame implements ActionListener {
 	public StartScreen() {
 		super("Bird Identification Quiz");
 
-		user = new User();
-		chosenDifficulty = new Difficulty();
+		theUser = new User();
+		//theUser.getUserInfo("Evan");
 		logIn = new JButton("Log in");
 		newUser = new JButton("Create new username");
 
@@ -60,13 +59,10 @@ public class StartScreen extends JFrame implements ActionListener {
 			 * TODO some sort of check to make sure it is saved in the user file
 			 */
 			
-			DifficultyGui setDifficulty = new DifficultyGui();
+			DifficultyGui setDifficulty = new DifficultyGui(theUser);
 			setDifficulty.setVisible(true);
 		} else {
 			
 		}
-
-		
- 
 	}
 }

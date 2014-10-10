@@ -12,23 +12,26 @@ import java.util.Random;
  */
 public class BirdIdGUI extends JFrame implements ActionListener {
 
-	private Score sessionScore;
+	private User currentUser;
 	private Difficulty chosenDifficulty;
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
 	private int sumOfQuestions;
 	private int correctBirdIndex;
+	private int sessionScore;
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
 
-	public BirdIdGUI(ArrayList<Bird> birds, Difficulty chosenDifficulty) {
+	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
+			Difficulty chosenDifficulty) {
 		super("BirdIdGUI");
 
 		this.birds = birds;
+		this.currentUser = currentUser;
 		this.chosenDifficulty = chosenDifficulty;
-		sessionScore = new Score();
-		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
+		sessionScore = 0;
+		scoreLabel = new JLabel("Score: " + sessionScore);
 		imageLabel = new JLabel();
 		sumOfQuestions = 0;
 		buttons = new ArrayList<JButton>();
@@ -86,8 +89,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		Color defaultColor = sourceButton.getBackground();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
-			sessionScore.incrementScore();
-			scoreLabel.setText("Score: " + sessionScore.getScore());
+			sessionScore++;
+			scoreLabel.setText("Score: " + sessionScore);
 
 		} else {
 			sourceButton.setBackground(Color.RED);
@@ -115,8 +118,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 
-		scoreLabel.setText("You Answered " + sessionScore.getScore() + "/"
+		scoreLabel.setText("You Answered " + sessionScore + "/"
 				+ chosenDifficulty.getNumQuestions() + "correctly");
+		currentUser.getUserScore().addToTotalScore(sessionScore,
+				chosenDifficulty.getNumQuestions());
 
 	}
 
@@ -137,10 +142,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			}
 		});
 		/*
-		timer.setRepeats(false);
-		timer.start();
-		timer.stop(); 
-		*/
+		 * timer.setRepeats(false); timer.start(); timer.stop();
+		 */
 		displayQuestion();
 	}
 }

@@ -12,12 +12,15 @@ public class DifficultyGui extends JFrame implements ActionListener {
 	 */
 	private JButton easy;
 	private JButton hard;
+	private User theUser;
 	private Difficulty difficulty;
 
-	public DifficultyGui() {
+	public DifficultyGui(User theUser) {
 		super("Choose Diffiuclty");
+		
+		this.theUser = theUser;
+		
 		this.setSize(200, 100);
-
 		this.setLayout(new BorderLayout());
 
 		easy = new JButton("Easy");
@@ -48,7 +51,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		difficulty.setDifficulty(sourceButton.getText());
 
 		BirdLibrary library = new BirdLibrary();
-		BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), difficulty);
+		BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), theUser, difficulty);
 		myFrame.setVisible(true);
 
 

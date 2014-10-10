@@ -5,13 +5,15 @@ import java.util.Scanner;
 
 public class User {
 	private String userName;
-	private String totalScore;
 	private String recommendedDifficulty;
+	private Score userScore;
 	
 	public User() {
 	}
-	public void createNewUser(String newUser) {
-		this.userName = userName;
+	public void creatNewUser(String userName) {
+		
+	}
+	public void getUserInfo(String userName) {
 		
 		try {
 			Scanner scanner = new Scanner(new File("src/Users"));
@@ -20,15 +22,19 @@ public class User {
 	        while(scanner.hasNextLine()) {
 	        	splitStrings = scanner.nextLine().split(",");
 	        	
-	        	userName = splitStrings[0];
+	        	//userName = splitStrings[0];
+	        	userName = "Evan";
 	        	
 	        	System.out.println(userName);
 	        	
-	        	totalScore = splitStrings[1];
+	        	//oldUserScore = new Score((Integer) splitStrings[1], (Integer)splitStrings[2]);
+	        	userScore = new Score(80, 115);
 	        	
-	        	System.out.println(totalScore);
+	        	System.out.println(userScore.getTotalScore());
 	        	
-	        	recommendedDifficulty = splitStrings[2];
+	        	//recommendedDifficulty = splitStrings[2];
+	        	recommendedDifficulty = "easy";
+	        	
 	        	System.out.println(recommendedDifficulty);
 	        }
 	        scanner.close();
@@ -36,11 +42,14 @@ public class User {
 			e.printStackTrace();
 		}
 	}
+	public void writeChangesToFile(String userName, Score score) {
+		
+	}
 	public String getUserName() {
 		return userName;
 	}
-	public String getUserScore() {
-		return totalScore;
+	public Score getUserScore() {
+		return userScore;
 	}
 	public String getDifficulty() {
 		return recommendedDifficulty;
