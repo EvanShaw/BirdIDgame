@@ -16,10 +16,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private Difficulty chosenDifficulty;
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
+	private Bird[] birdsUsed;
 	private Bird currentBird;
-	private int birdListIndex; 
+	private int sumOfQuestions; 
 	private ArrayList<JButton> buttons;
-	private JLabel imageLabel;  
+	private JLabel imageLabel;
 	   
 	public BirdIdGUI(ArrayList<Bird> birds, Difficulty chosenDifficulty) {
 		super("BirdIdGUI");
@@ -28,8 +29,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		this.chosenDifficulty = chosenDifficulty;
 		sessionScore = new Score();
 		scoreLabel = new JLabel("Score: " + sessionScore.getScore());
-		birdListIndex = 0;
-		currentBird = birds.get(birdListIndex);
+		sumOfQuestions = 0;
+		currentBird = birds.remove(0);
 		buttons = new ArrayList<JButton>();
 		
 		//basic window operations
@@ -101,12 +102,12 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			sourceButton.setBackground(Color.RED);
 				
 		}
-		birdListIndex++;
-		if (birdListIndex == chosenDifficulty.getNumPictures()) {
+		if (sumOfQuestions == chosenDifficulty.getNumQuestions()) {
 			endProgram();
 		} else {
 			resetAfterAction(sourceButton, defaultColor);
 		}
+		currentBird = birds.remove(0);
 	}
 
 	/**
@@ -114,7 +115,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 		
-			scoreLabel.setText("You Answered "+sessionScore.getScore()+"/"+chosenDifficulty.getNumPictures()+"correctly");
+			scoreLabel.setText("You Answered "+sessionScore.getScore()+"/"+chosenDifficulty.getNumQuestions()+"correctly");
 			
 	}
 
@@ -127,7 +128,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
 		Timer timer = new Timer(2000, new ActionListener() {
 		    public void actionPerformed(ActionEvent event) {
-				currentBird = birds.get(birdListIndex);
+				currentBird = birds.get(sumOfQuestions);
 				imageLabel.setIcon(new ImageIcon("src/thumb_"+currentBird.getImagePath()));
 				srcBtn.setBackground(defaultColor);
 				//TODO set all buttons using data fields to default color, not just source
