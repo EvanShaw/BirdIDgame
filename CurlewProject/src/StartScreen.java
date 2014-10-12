@@ -16,8 +16,6 @@ public class StartScreen extends JFrame implements ActionListener {
 	public StartScreen() {
 		super("Bird Identification Quiz");
 
-		theUser = new User();
-		//theUser.getUserInfo("Evan");
 		logIn = new JButton("Log in");
 		newUser = new JButton("Create new username");
 
@@ -53,16 +51,10 @@ public class StartScreen extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-
-		if (sourceButton == logIn) {
-			/*
-			 * TODO some sort of check to make sure it is saved in the user file
-			 */
+		
+		theUser = new User(userName.getText());
+		DifficultyGui setDifficulty = new DifficultyGui(theUser);
+		setDifficulty.setVisible(true);
 			
-			DifficultyGui setDifficulty = new DifficultyGui(theUser);
-			setDifficulty.setVisible(true);
-		} else {
-			
-		}
 	}
 }
