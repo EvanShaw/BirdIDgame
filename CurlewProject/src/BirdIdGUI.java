@@ -17,7 +17,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
-	private int sumOfQuestions;
+	private int numQuestionsAnswered;
+	private int numQuestions;
 	private int correctBirdIndex;
 	private int sessionScore;
 	private ArrayList<JButton> buttons;
@@ -33,7 +34,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		sessionScore = 0;
 		scoreLabel = new JLabel("Score: " + sessionScore);
 		imageLabel = new JLabel();
-		sumOfQuestions = chosenDifficulty.getNumQuestions();
+		numQuestionsAnswered = 0;
+		numQuestions = chosenDifficulty.getNumQuestions();
 		buttons = new ArrayList<JButton>();
 
 		// basic window operations
@@ -104,8 +106,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birds.remove(correctBirdIndex);
 		Collections.shuffle(birds);
 
-		sumOfQuestions++;
-		if (sumOfQuestions == chosenDifficulty.getNumQuestions()) {
+		numQuestionsAnswered++;
+		if (numQuestionsAnswered == numQuestions) {
 			endProgram();
 		} else {
 			resetAfterAction(sourceButton, defaultColor);
@@ -119,8 +121,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void endProgram() {
 
 		scoreLabel.setText("You Answered " + sessionScore + "/"
-				+ chosenDifficulty.getNumQuestions() + "correctly");
-		currentUser.getUserScore().addToTotalScore(sessionScore, sumOfQuestions);
+				+ numQuestions + "correctly");
+		currentUser.getUserScore().addToTotalScore(sessionScore, numQuestions);
 		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
 
 	}

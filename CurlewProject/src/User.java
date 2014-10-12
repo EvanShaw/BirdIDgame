@@ -42,15 +42,6 @@ public class User {
 		}
 		return userFound;
 	}
-	public void creatNewUser(String userName) {
-		
-	}
-	public void getUserInfo(String userName) {
-		/*
-		 * FileWriter writer = new FileWriter("userInfo.csv"); writer.write("");
-		 * writer.close(); Scanner scanner = new Scanner(userInfo);
-		 */
-	}
 	public void addUser(File userInfo) {
 		try {
 			FileWriter writer = new FileWriter(userInfo, true);
@@ -89,9 +80,24 @@ public class User {
 		    }
 		    
 		    String[] splitOldScore = oldScore.split("/");
-		    System.out.println(splitOldScore[0]);
-		    System.out.println(splitOldScore[1]);
 		    
+		    String totalCorrect = splitOldScore[0];
+		    String totalQuestions = splitOldScore[1];
+		    int intTotalCorrect = Integer.parseInt(totalCorrect);
+		    int intTotalQuestions = Integer.parseInt(totalQuestions);
+		    System.out.println(totalCorrect);
+		    System.out.println(totalQuestions);
+		    
+		    int correctAnswers = sessionScore.getNumCorrectAnswers();
+		    int numQuestions = sessionScore.getNumQuestions();
+		    System.out.println(correctAnswers);
+		    System.out.println(numQuestions);
+		    
+		    Score newScore = new Score(correctAnswers + intTotalCorrect, numQuestions + intTotalQuestions);
+		    
+		   // pw.printLn(userName + ", " + newScore.getTotalScore());
+		    
+		    scanner.close();
 		    pw.close();
 
 		    //Rename the new file to the filename the original file had.
