@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,7 +95,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < buttons.size(); i++) {
-				if (buttons.get(i).equals(currentBird.getBirdName())) {
+				if (buttons.get(i).getText().equals(currentBird.getBirdName())) {
 					buttons.get(i).setBackground(Color.GREEN);
 				}
 			}
@@ -121,14 +120,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-		scoreLabel.setText("You Answered " + sessionScore + "/"
-
-+ numQuestions + "correctly");
-		
-
-			
+		scoreLabel.setText("You Answered " + sessionScore + "/" + numQuestions + "correctly");	
 		currentUser.getUserScore().addToTotalScore(sessionScore, numQuestions);
-
 		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
 	}
 
@@ -145,9 +138,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 				for (int i = 0; i < buttons.size(); i++) { //sets all buttons to default
 					buttons.get(i).setBackground(defaultColor);
 				}
+				displayQuestion();
 			}
 		});
-		timer.setRepeats(false); timer.start(); timer.stop();
-		displayQuestion();
+		timer.setRepeats(false);
+		timer.start(); //timer.stop();
 	}
 }
