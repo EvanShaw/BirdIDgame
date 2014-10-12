@@ -11,6 +11,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 	 * quiz.
 	 */
 	private JButton easy;
+	private JButton medium;
 	private JButton hard;
 	private User theUser;
 	private Difficulty difficulty;
@@ -20,10 +21,11 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		
 		this.theUser = theUser;
 		
-		this.setSize(200, 100);
+		this.setSize(300, 100);
 		this.setLayout(new BorderLayout());
 
 		easy = new JButton("Easy");
+		medium= new JButton("Medium");
 		hard = new JButton("Hard");
 		difficulty = new Difficulty();
 		this.add(new JLabel("Choose Difficulty:"), BorderLayout.NORTH);
@@ -35,8 +37,10 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		this.add(new JLabel("Choose Difficulty:"), BorderLayout.NORTH);
 
 		south.add(easy);
+		south.add(medium);
 		south.add(hard);
 		easy.addActionListener(this);
+		medium.addActionListener(this);
 		hard.addActionListener(this);
 		
 		this.add(south, BorderLayout.SOUTH);
