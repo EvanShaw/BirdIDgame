@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,7 +95,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < buttons.size(); i++) {
-				if (buttons.get(i).equals(currentBird.getBirdName())) {
+				if (buttons.get(i).getText().equals(currentBird.getBirdName())) {
 					buttons.get(i).setBackground(Color.GREEN);
 				}
 			}
