@@ -18,6 +18,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 
 	public DifficultyGui(User theUser) {
 		super("Choose Diffiuclty");
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.theUser = theUser;
 		
@@ -57,6 +58,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		BirdLibrary library = new BirdLibrary();
 		BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), theUser, difficulty);
 		myFrame.setVisible(true);
+		
 
 
 	}

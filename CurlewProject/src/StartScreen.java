@@ -8,7 +8,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		//fields
 	private User theUser;
 	private JButton logIn;
-	private JButton newUser;
+	
 
 	private JTextField userName;
 	private JLabel enterUserName;
@@ -16,8 +16,8 @@ public class StartScreen extends JFrame implements ActionListener {
 	public StartScreen() {
 		super("Bird Identification Quiz");
 
-		logIn = new JButton("Log in");
-		newUser = new JButton("Create new username");
+		logIn = new JButton("Log in/ register");
+	
 
 		userName = new JTextField("Enter Username");
 		enterUserName = new JLabel(
@@ -35,19 +35,19 @@ public class StartScreen extends JFrame implements ActionListener {
 
 		JPanel center = new JPanel(new GridLayout(2, 0));
 		center.add(userName);
-		center.add(enterUserName);
+		
 
 		JPanel userBtnPanel = new JPanel(new FlowLayout());
 		contain.add(userBtnPanel, BorderLayout.SOUTH);
 		contain.add(center, BorderLayout.CENTER);
 
 		userBtnPanel.add(logIn);
-		userBtnPanel.add(newUser);
+		
 
 		logIn.addActionListener(this);
-		newUser.addActionListener(this);
-	}
+			}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
@@ -55,6 +55,8 @@ public class StartScreen extends JFrame implements ActionListener {
 		theUser = new User(userName.getText());
 		DifficultyGui setDifficulty = new DifficultyGui(theUser);
 		setDifficulty.setVisible(true);
+		this.disable();
+		
 			
 	}
 }
