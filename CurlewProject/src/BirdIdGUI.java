@@ -17,11 +17,13 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
-	private int sumOfQuestions;
+	private int numQuestionsAnswered;
+	private int numQuestions;
 	private int correctBirdIndex;
 	private int sessionScore;
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
+	private final Color defaultColor;
 
 	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
 			Difficulty chosenDifficulty) {
@@ -33,7 +35,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		sessionScore = 0;
 		scoreLabel = new JLabel("Score: " + sessionScore);
 		imageLabel = new JLabel();
-		sumOfQuestions = chosenDifficulty.getNumQuestions();
+		numQuestionsAnswered = 0;
+		numQuestions = chosenDifficulty.getNumQuestions();
 		buttons = new ArrayList<JButton>();
 
 		// basic window operations
@@ -57,6 +60,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 			southButtonPanel.add(buttons.get(i));
 			buttons.get(i).addActionListener(this);
 		}
+		defaultColor = buttons.get(0).getBackground();
 
 		displayQuestion();
 	}
@@ -66,7 +70,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * each question.
 	 */
 	public void displayQuestion() {
-
 		Random rand = new Random();
 		Collections.shuffle(birds);
 		correctBirdIndex = rand.nextInt(chosenDifficulty.getNumButtons());
@@ -77,7 +80,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
 			buttons.get(i).setText(birds.get(i).getBirdName());
 		}
-
 	}
 
 	/**
@@ -87,17 +89,18 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		Color defaultColor = sourceButton.getBackground();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			sessionScore++;
 			scoreLabel.setText("Score: " + sessionScore);
-
 		} else {
 			sourceButton.setBackground(Color.RED);
-
+			for (int i = 0; i < buttons.size(); i++) {
+				if (buttons.get(i).equals(currentBird.getBirdName())) {
+					buttons.get(i).setBackground(Color.GREEN);
+				}
+			}
 		}
-
 		/*
 		 * Remove the correct bird from the array so that it is not randomly
 		 * selected in the future
@@ -105,11 +108,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birds.remove(correctBirdIndex);
 		Collections.shuffle(birds);
 
-		sumOfQuestions++;
-		if (sumOfQuestions == chosenDifficulty.getNumQuestions()) {
+		numQuestionsAnswered++;
+		if (numQuestionsAnswered == numQuestions) {
 			endProgram();
 		} else {
-			resetAfterAction(sourceButton, defaultColor);
+			resetAfterAction();
 		}
 	}
 
@@ -118,35 +121,33 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-
 		scoreLabel.setText("You Answered " + sessionScore + "/"
-				+ chosenDifficulty.getNumQuestions() + " correctly");
-		currentUser.getUserScore().addToTotalScore(sessionScore, sumOfQuestions);
-		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
 
++ numQuestions + "correctly");
+		
+
+			
+		currentUser.getUserScore().addToTotalScore(sessionScore, numQuestions);
+
+		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
 	}
 
 	/**
-	 * When there are more questions to come, this method resets the screen for
-	 * the new question and calls populate() to re-populate the buttons.
+	 * When there are more questions to come, this method resets the buttons for
+	 * the new question, calling displayQuestion() to re-populate the buttons.
 	 * 
-	 * @params srcBtn, defaultColor - uses the variables from the
-	 *         actionPerformed method to reset the changed button to its
-	 *         original color
+	 * @params defaultColor - uses the variables from the actionPerformed method
+	 * to reset the changed button to its original color.
 	 */
-	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
+	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//temporary test
-				endProgram();
-				srcBtn.setBackground(defaultColor);
-				// TODO set all buttons using data fields to default color, not
-				// just source
+				for (int i = 0; i < buttons.size(); i++) { //sets all buttons to default
+					buttons.get(i).setBackground(defaultColor);
+				}
 			}
 		});
-		/*
-		 * timer.setRepeats(false); timer.start(); timer.stop();
-		 */
+		timer.setRepeats(false); timer.start(); timer.stop();
 		displayQuestion();
 	}
 }

@@ -22,6 +22,9 @@ public class Score {
 	public int getNumCorrectAnswers() {
 		return numCorrectAnswers;
 	}
+	public int getNumQuestions() {
+		return numQuestions;
+	}
 	public String getTotalScore() {
 		return totalScore;
 	}
