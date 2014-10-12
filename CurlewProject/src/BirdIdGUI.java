@@ -139,9 +139,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 				for (int i = 0; i < buttons.size(); i++) { //sets all buttons to default
 					buttons.get(i).setBackground(defaultColor);
 				}
+				displayQuestion();
 			}
 		});
-		timer.setRepeats(false); timer.start(); timer.stop();
-		displayQuestion();
+		timer.setRepeats(false);
+		timer.start(); //timer.stop();
 	}
 }
