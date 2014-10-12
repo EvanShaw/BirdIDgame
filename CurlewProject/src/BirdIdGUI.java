@@ -38,7 +38,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 
 		// basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(600, 500);
+		this.setSize(760, 500);
 
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
@@ -72,8 +72,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		correctBirdIndex = rand.nextInt(chosenDifficulty.getNumButtons());
 		currentBird = birds.get(correctBirdIndex);
 
-		imageLabel.setIcon(new ImageIcon("src/thumb_"
-				+ currentBird.getImagePath()));
+		imageLabel.setIcon(new ImageIcon(currentBird.getImagePath()));
 
 		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
 			buttons.get(i).setText(birds.get(i).getBirdName());
@@ -121,7 +120,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void endProgram() {
 
 		scoreLabel.setText("You Answered " + sessionScore + "/"
-				+ chosenDifficulty.getNumQuestions() + "correctly");
+				+ chosenDifficulty.getNumQuestions() + " correctly");
 		currentUser.getUserScore().addToTotalScore(sessionScore, sumOfQuestions);
 		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
 
