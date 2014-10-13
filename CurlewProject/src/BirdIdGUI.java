@@ -20,6 +20,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
 	private int correctBirdIndex;
+	
 	private final Color defaultColor;
 
 	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
