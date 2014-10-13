@@ -161,14 +161,13 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				for (int i = 0; i < buttons.size(); i++) { // sets all buttons
-															// to default
+				//sets all buttons to default color
+				for (int i = 0; i < buttons.size(); i++) {
 					buttons.get(i).setBackground(defaultColor);
 				}
 				displayQuestion();
 			}
 		});
-		timer.setRepeats(false);
-		timer.start(); // timer.stop();
+		timer.setRepeats(false); timer.start(); // timer.stop();
 	}
 }
