@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,10 +46,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
-		JPanel flowLayout=new JPanel(new FlowLayout());
-		JPanel southButtonPanel = new JPanel(new GridLayout(2,0));
+		JPanel flowLayout = new JPanel(new FlowLayout());
+		JPanel southButtonPanel = new JPanel(new GridLayout(2, 0));
 		flowLayout.add(southButtonPanel);
-		contain.add(southButtonPanel, BorderLayout.SOUTH,SwingConstants.CENTER);
+		contain.add(southButtonPanel, BorderLayout.SOUTH, SwingConstants.CENTER);
 		contain.add(scoreLabel, BorderLayout.NORTH);
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contain.add(imageLabel, BorderLayout.CENTER);
@@ -120,9 +121,28 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-		scoreLabel.setText("You Answered " + sessionScore + "/" + numQuestions + "correctly");	
+		String[] options = { "Take Another Quiz", "Return To Login" };
+
+		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
+				+ numQuestions + "correctly", "End Of Quiz", 0,
+				JOptionPane.QUESTION_MESSAGE, null, options, 1);
+		if(options.equals(options[0])){
+			
+			StartScreen start=new StartScreen();
+			start.setVisible(true);
+			this.setVisible(false);
+			
+			
+		}else{
+			DifficultyGui gui=new DifficultyGui(currentUser);
+			gui.setVisible(true);
+			this.setVisible(false);
+			
+		}
+
 		currentUser.getUserScore().addToTotalScore(sessionScore, numQuestions);
-		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
+		currentUser.writeChangesToFile(currentUser.getUserName(),
+				currentUser.getUserScore());
 	}
 
 	/**
@@ -130,18 +150,19 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * the new question, calling displayQuestion() to re-populate the buttons.
 	 * 
 	 * @params defaultColor - uses the variables from the actionPerformed method
-	 * to reset the changed button to its original color.
+	 *         to reset the changed button to its original color.
 	 */
 	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				for (int i = 0; i < buttons.size(); i++) { //sets all buttons to default
+				for (int i = 0; i < buttons.size(); i++) { // sets all buttons
+															// to default
 					buttons.get(i).setBackground(defaultColor);
 				}
 				displayQuestion();
 			}
 		});
 		timer.setRepeats(false);
-		timer.start(); //timer.stop();
+		timer.start(); // timer.stop();
 	}
 }

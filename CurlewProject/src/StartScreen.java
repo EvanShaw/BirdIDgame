@@ -47,7 +47,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		logIn.addActionListener(this);
 			}
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
@@ -55,7 +55,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		theUser = new User(userName.getText());
 		DifficultyGui setDifficulty = new DifficultyGui(theUser);
 		setDifficulty.setVisible(true);
-		this.disable();
+		this.dispose();
 		
 			
 	}

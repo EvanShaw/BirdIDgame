@@ -58,6 +58,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		BirdLibrary library = new BirdLibrary();
 		BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), theUser, difficulty);
 		myFrame.setVisible(true);
+		this.dispose();
 		
 
 
