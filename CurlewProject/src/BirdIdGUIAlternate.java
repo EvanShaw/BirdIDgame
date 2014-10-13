@@ -142,11 +142,15 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
 
-	int index=	JOptionPane.showOptionDialog(null,
-				"You Answered " + sessionScore.getNumCorrectAnswers() + "/"
-						+ sessionScore.getNumQuestions() + " correctly",
-				"End Of Quiz", 0, JOptionPane.QUESTION_MESSAGE, null, options, 0);
-		if (options[index]==options[1]) {
+		int index = JOptionPane.showOptionDialog(null,
+				"Well done " + currentUser.getUserName() + ", you answered "
+						+ sessionScore.getNumCorrectAnswers() + "/"
+						+ sessionScore.getNumQuestions()
+						+ " correctly. Your new total score is "
+						+ currentUser.getUserScore().getTotalScore() + ".",
+				"End Of Quiz", 0, JOptionPane.QUESTION_MESSAGE, null, options,
+				0);
+		if (options[index].equals(options[1])) {
 			StartScreen start = new StartScreen();
 			start.setVisible(true);
 			this.setVisible(false);
