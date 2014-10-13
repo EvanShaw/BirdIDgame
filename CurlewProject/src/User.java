@@ -21,6 +21,7 @@ public class User {
 				while (scanner.hasNextLine()) {
 					splitStrings = scanner.nextLine().split(",");
 					if (splitStrings[0].equals(userName)) {
+						System.out.print("user exists");
 						isPreviousUser = true;
 						String oldScore = splitStrings[1];
 						String[] splitOldScore = oldScore.split("/");
@@ -74,8 +75,8 @@ public class User {
 		File tempFile = new File(userInfo.getAbsolutePath() + ".tmp");
 
 		try {
-			PrintWriter newFileWriter = new PrintWriter(new FileWriter(tempFile));
-			//FileWriter writer = new FileWriter(userInfo, true);
+			//PrintWriter newFileWriter = new PrintWriter(new FileWriter(tempFile));
+			FileWriter writer = new FileWriter(tempFile);
 			Scanner scanner = new Scanner(userInfo);
 
 			// Read from the original file and write to the new
@@ -83,15 +84,14 @@ public class User {
 			String[] splitStrings = {};
 			while (scanner.hasNextLine()) {
 				splitStrings = scanner.nextLine().split(",");
-				System.out.println(splitStrings[0]);
+				System.out.println("userName: " + splitStrings[0] + " score: " + splitStrings[1]);
 				if (!splitStrings[0].equals(userName)) {
-					System.out.println("Did not find User");
-					newFileWriter.write(scanner.nextLine() + "\n");
-					newFileWriter.flush();
+					System.out.println("the name in this line does not equal " + userName);
+					//newFileWriter.write(scanner.nextLine() + "\n");
+					//newFileWriter.flush();
 					
-					//writer.write(splitStrings[0]);
-					//writer.write(splitStrings[1]);
-					//writer.flush();
+					writer.write(splitStrings[0] + "," + splitStrings[1] + "\n");
+					writer.flush();
 					
 				} 
 			}
@@ -103,16 +103,18 @@ public class User {
 			System.out.println(numQuestions);
 			
 
-			System.out.println(userScore.getTotalScore());
-			newFileWriter.append(userName + "," + newScore.getTotalScore());
+			System.out.println("score to be added: " + userScore.getTotalScore());
+			
+			writer.write(userName + "," + newScore.getTotalScore() + "\n");
+			//newFileWriter.append(userName + "," + newScore.getTotalScore());
 			//writer.write
 			
 			
 			scanner.close();
-			newFileWriter.flush();
-			newFileWriter.close();
-			//writer.flush();
-			//writer.close();
+			//newFileWriter.flush();
+			//newFileWriter.close();
+			writer.flush();
+			writer.close();
 
 			// Rename the new file to the filename the original file had.
 			if (!tempFile.renameTo(userInfo)) {
