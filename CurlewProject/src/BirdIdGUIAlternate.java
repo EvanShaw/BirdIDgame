@@ -128,7 +128,15 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-		String[] options = { "Take Another Quiz", "Return To Login" };
+
+		String[] options = { 
+				"Take Another Quiz", 
+				"Return To Login" 
+				};
+
+		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+				+ sessionScore.getNumQuestions() + " correctly");
+
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());

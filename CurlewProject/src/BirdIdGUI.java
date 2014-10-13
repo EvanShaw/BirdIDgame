@@ -21,6 +21,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
 	private int correctBirdIndex;
+	
 	private final Color defaultColor;
 
 	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
@@ -120,11 +121,15 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 
-		String[] options = { "Take Another Quiz", "Return To Login" };
+		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+				+ sessionScore.getNumQuestions() + " correctly");
+
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
+		
+		String[] options = { "Take Another Quiz", "Return To Login" };
 
 
 		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
