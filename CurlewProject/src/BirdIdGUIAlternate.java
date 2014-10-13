@@ -127,8 +127,8 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-		scoreLabel.setText("You Answered " + sessionScore.getNumAnsweredQuestions() + "/"
-				+ sessionScore.getNumQuestions() + "correctly");
+		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+				+ sessionScore.getNumQuestions() + " correctly");
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());
