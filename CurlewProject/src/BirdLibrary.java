@@ -11,7 +11,7 @@ public class BirdLibrary {
 	private ArrayList<Bird> birds;
 	
 	public BirdLibrary() {
-		birds = new ArrayList<>();
+		birds = new ArrayList<Bird>();
 		try {
 			Scanner scanner = new Scanner(new File("src/stage2_materials/full_birdlist.csv"));
 			scanner.nextLine();
@@ -22,7 +22,7 @@ public class BirdLibrary {
 	        	if (!splitStrings[3].equals("")) {
 	        		 birdName += " (" + splitStrings[3] + ")";
 	        	}
-		        birds.add(new Bird(birdName, "stage2_materials.photos/" + splitStrings[2]));
+		        birds.add(new Bird(birdName, "src/stage2_materials/photos/thumb_" + splitStrings[2]));
 	        }
 	        scanner.close();
 		} catch(FileNotFoundException e) {
