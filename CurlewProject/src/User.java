@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 
 public class User {
+	
 	private String userName;
 	private String recommendedDifficulty;
 	private Score userScore;
@@ -46,6 +47,10 @@ public class User {
 		} else {
 			try {
 				userInfo.createNewFile();
+				FileWriter tempWriter = new FileWriter(userInfo, true);
+				tempWriter.write("User,0/0\n");
+				tempWriter.flush();
+				tempWriter.close();
 				addUser(userInfo);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -75,7 +80,6 @@ public class User {
 		File tempFile = new File(userInfo.getAbsolutePath() + ".tmp");
 
 		try {
-			//PrintWriter newFileWriter = new PrintWriter(new FileWriter(tempFile));
 			FileWriter writer = new FileWriter(tempFile);
 			Scanner scanner = new Scanner(userInfo);
 

@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
 	private int correctBirdIndex;
+	
 	private final Color defaultColor;
 
 	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
@@ -41,8 +43,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
+
+		
 		JPanel southButtonPanel = new JPanel(new GridLayout(2,0));
 		contain.add(southButtonPanel, BorderLayout.SOUTH,SwingConstants.CENTER);
+
 		contain.add(scoreLabel, BorderLayout.NORTH);
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contain.add(imageLabel, BorderLayout.CENTER);
@@ -115,12 +120,39 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
+
 		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
 				+ sessionScore.getNumQuestions() + " correctly");
+
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
+		
+		String[] options = { "Take Another Quiz", "Return To Login" };
+
+
+		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
+				+ sessionScore.getNumQuestions() + "correctly", "End Of Quiz", 0,
+				JOptionPane.QUESTION_MESSAGE, null, options, 1);
+		if(options.equals(options[0])){
+			
+			StartScreen start=new StartScreen();
+			start.setVisible(true);
+			this.setVisible(false);
+			
+			
+		}else{
+			DifficultyGui gui=new DifficultyGui(currentUser);
+			gui.setVisible(true);
+			this.setVisible(false);
+			
+		}
+
+		
+
+		
+	
 	}
 
 	/**
