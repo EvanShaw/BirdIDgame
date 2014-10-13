@@ -41,10 +41,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
-		JPanel flowLayout = new JPanel(new FlowLayout());
-		JPanel southButtonPanel = new JPanel(new GridLayout(2, 0));
-		flowLayout.add(southButtonPanel);
-		contain.add(southButtonPanel, BorderLayout.SOUTH, SwingConstants.CENTER);
+		JPanel southButtonPanel = new JPanel(new GridLayout(2,0));
+		contain.add(southButtonPanel, BorderLayout.SOUTH,SwingConstants.CENTER);
 		contain.add(scoreLabel, BorderLayout.NORTH);
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contain.add(imageLabel, BorderLayout.CENTER);
