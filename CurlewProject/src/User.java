@@ -13,6 +13,7 @@ public class User {
 	public User(String userName) {
 		this.userName = userName;
 		File userInfo = new File("userInfo.csv");
+		
 		if (userInfo.isFile()) {
 			try {
 				boolean isPreviousUser = false;
@@ -89,22 +90,22 @@ public class User {
 				splitStrings = scanner.nextLine().split(",");
 				//testing
 				System.out.println("userName: " + splitStrings[0] + " score: " + splitStrings[1]);
-				if (!splitStrings[0].equals(userName)) {
+				if (splitStrings[0].equals(userName)) {
+					int correctAnswers = newScore.getNumCorrectAnswers();
+					int numQuestions = newScore.getNumQuestions();
+					//testing
+					System.out.println(correctAnswers);
+					System.out.println(numQuestions);
+					System.out.println("score to be added: " + userScore.getTotalScore());
+		
+					writer.write(userName + "," + newScore.getTotalScore() + "\n");
+		
+				} else {
 					//testing
 					System.out.println("the name in this line does not equal " + userName);
 					writer.write(splitStrings[0] + "," + splitStrings[1] + "\n");
-					writer.flush();
-				} 
+				}
 			}
-
-			int correctAnswers = newScore.getNumCorrectAnswers();
-			int numQuestions = newScore.getNumQuestions();
-			//testing
-			System.out.println(correctAnswers);
-			System.out.println(numQuestions);
-			System.out.println("score to be added: " + userScore.getTotalScore());
-			
-			writer.write(userName + "," + newScore.getTotalScore() + "\n");
 			
 			scanner.close();
 			writer.flush();

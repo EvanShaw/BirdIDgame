@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -127,12 +128,42 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-		scoreLabel.setText("You Answered " + sessionScore.getNumAnsweredQuestions() + "/"
-				+ sessionScore.getNumQuestions() + "correctly");
+
+		String[] options = { 
+				"Take Another Quiz", 
+				"Return To Login" 
+				};
+
+		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+				+ sessionScore.getNumQuestions() + " correctly");
+
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
+
+
+		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
+				+ sessionScore.getNumQuestions() + "correctly", "End Of Quiz", 0,
+				JOptionPane.QUESTION_MESSAGE, null, options, 1);
+		if(options.equals(options[0])){
+			
+			StartScreen start=new StartScreen();
+			start.setVisible(true);
+			this.setVisible(false);
+			
+			
+		}else{
+			DifficultyGui gui=new DifficultyGui(currentUser);
+			gui.setVisible(true);
+			this.setVisible(false);
+			
+		}
+
+		
+
+		
+	
 	}
 
 	/**
