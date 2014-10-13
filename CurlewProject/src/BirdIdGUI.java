@@ -123,7 +123,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		scoreLabel.setText("You Answered " + sessionScore + "/"
 				+ numQuestions + "correctly");
 		currentUser.getUserScore().addToTotalScore(sessionScore, numQuestions);
-		currentUser.writeChangesToFile(currentUser.getUserName(), currentUser.getUserScore());
+		currentUser.writeChangesToFile(currentUser.getUserScore());
 
 	}
 
@@ -138,8 +138,6 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void resetAfterAction(final JButton srcBtn, final Color defaultColor) {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//temporary test
-				endProgram();
 				srcBtn.setBackground(defaultColor);
 				// TODO set all buttons using data fields to default color, not
 				// just source
