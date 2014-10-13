@@ -16,12 +16,10 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
-	private int numQuestionsAnswered;
-	private int numQuestions;
-	private int correctBirdIndex;
-	private int sessionScore;
+	private Score sessionScore;
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
+	private int correctBirdIndex;
 	private final Color defaultColor;
 
 	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
@@ -31,11 +29,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		this.birds = birds;
 		this.currentUser = currentUser;
 		this.chosenDifficulty = chosenDifficulty;
-		sessionScore = 0;
-		scoreLabel = new JLabel("Score: " + sessionScore);
+		sessionScore = new Score(0, chosenDifficulty.getNumQuestions());
+		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers());
 		imageLabel = new JLabel();
-		numQuestionsAnswered = 0;
-		numQuestions = chosenDifficulty.getNumQuestions();
 		buttons = new ArrayList<JButton>();
 
 		// basic window operations
@@ -45,9 +41,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
-		//JPanel flowLayout=new JPanel(new FlowLayout());
 		JPanel southButtonPanel = new JPanel(new GridLayout(2,0));
-		//flowLayout.add(southButtonPanel);
 		contain.add(southButtonPanel, BorderLayout.SOUTH,SwingConstants.CENTER);
 		contain.add(scoreLabel, BorderLayout.NORTH);
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -90,8 +84,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		JButton sourceButton = (JButton) event.getSource();
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
-			sessionScore++;
-			scoreLabel.setText("Score: " + sessionScore);
+			sessionScore.incrementScore();
+			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers());
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < buttons.size(); i++) {
@@ -107,8 +101,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		birds.remove(correctBirdIndex);
 		Collections.shuffle(birds);
 
-		numQuestionsAnswered++;
-		if (numQuestionsAnswered == numQuestions) {
+		sessionScore.incrementAnsweredQuestions();
+		if (sessionScore.getNumAnsweredQuestions() == sessionScore
+				.getNumQuestions()) {
 			endProgram();
 		} else {
 			resetAfterAction();
@@ -120,8 +115,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-		scoreLabel.setText("You Answered " + sessionScore + "/" + numQuestions + "correctly");	
-		currentUser.getUserScore().addToTotalScore(sessionScore, numQuestions);
+		scoreLabel.setText("You Answered " + sessionScore.getNumAnsweredQuestions() + "/"
+				+ sessionScore.getNumQuestions() + "correctly");
+		currentUser.getUserScore().addToTotalScore(
+				sessionScore.getNumCorrectAnswers(),
+				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
 	}
 
@@ -130,18 +128,19 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * the new question, calling displayQuestion() to re-populate the buttons.
 	 * 
 	 * @params defaultColor - uses the variables from the actionPerformed method
-	 * to reset the changed button to its original color.
+	 *         to reset the changed button to its original color.
 	 */
 	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				for (int i = 0; i < buttons.size(); i++) { //sets all buttons to default
+				for (int i = 0; i < buttons.size(); i++) { // sets all buttons
+															// to default
 					buttons.get(i).setBackground(defaultColor);
 				}
 				displayQuestion();
 			}
 		});
 		timer.setRepeats(false);
-		timer.start(); //timer.stop();
+		timer.start(); // timer.stop();
 	}
 }

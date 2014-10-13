@@ -21,7 +21,7 @@ public class User {
 					splitStrings = scanner.nextLine().split(",");
 					if (splitStrings[0].equals(userName)) {
 						//testing
-						System.out.print("user exists");
+						System.out.println("user exists");
 						isPreviousUser = true;
 						String oldScore = splitStrings[1];
 						String[] splitOldScore = oldScore.split("/");
@@ -30,8 +30,8 @@ public class User {
 						int intTotalCorrect = Integer.parseInt(totalCorrect);
 						int intTotalQuestions = Integer.parseInt(totalQuestions);
 						//testing
-						System.out.println(intTotalCorrect);
-						System.out.println(intTotalQuestions);
+						System.out.println(userName + ": " + intTotalCorrect + "/" + intTotalQuestions);
+						
 						userScore = new Score(intTotalCorrect, intTotalQuestions);
 					}
 				}
