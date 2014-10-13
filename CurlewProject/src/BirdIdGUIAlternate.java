@@ -1,39 +1,47 @@
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-/**
- * Creates the GUI for the user to play the game with.
- */
-public class BirdIdGUI extends JFrame implements ActionListener {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
+
+public class BirdIdGUIAlternate extends JFrame implements ActionListener {
+	
 	private User currentUser;
 	private Difficulty chosenDifficulty;
 	private JLabel scoreLabel;
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
 	private Score sessionScore;
-	private ArrayList<JButton> buttons;
-	private JLabel imageLabel;
+	private JButton theBird;
+	private ArrayList<JButton> birdImageButtons;
 	private int correctBirdIndex;
 	private final Color defaultColor;
-
-	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
+	
+	public BirdIdGUIAlternate(ArrayList<Bird> birds, User currentUser,
 			Difficulty chosenDifficulty) {
-		super("BirdIdGUI");
+		super("BirdIdGUIAlternate");
 
 		this.birds = birds;
 		this.currentUser = currentUser;
 		this.chosenDifficulty = chosenDifficulty;
 		sessionScore = new Score(0, chosenDifficulty.getNumQuestions());
 		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers());
-		imageLabel = new JLabel();
-		buttons = new ArrayList<JButton>();
+		birdImageButtons = new ArrayList<JButton>();
+		theBird = new JButton();
 
 		// basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,22 +50,21 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
-
-		
-		JPanel southButtonPanel = new JPanel(new GridLayout(2,0));
-		contain.add(southButtonPanel, BorderLayout.SOUTH,SwingConstants.CENTER);
-
+		JPanel flowLayout = new JPanel(new FlowLayout());
+		JPanel southButtonPanel = new JPanel(new GridLayout(2, 0));
+		flowLayout.add(southButtonPanel);
+		contain.add(southButtonPanel, BorderLayout.SOUTH, SwingConstants.CENTER);
 		contain.add(scoreLabel, BorderLayout.NORTH);
-		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		contain.add(imageLabel, BorderLayout.CENTER);
+		theBird.setHorizontalAlignment(SwingConstants.CENTER);
+		contain.add(theBird, BorderLayout.CENTER);
 
 		// creating the buttons
 		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
-			buttons.add(new JButton());
-			southButtonPanel.add(buttons.get(i));
-			buttons.get(i).addActionListener(this);
+			birdImageButtons.add(new JButton());
+			southButtonPanel.add(birdImageButtons.get(i));
+			birdImageButtons.get(i).addActionListener(this);
 		}
-		defaultColor = buttons.get(0).getBackground();
+		defaultColor = birdImageButtons.get(0).getBackground();
 
 		displayQuestion();
 	}
@@ -72,10 +79,11 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		correctBirdIndex = rand.nextInt(chosenDifficulty.getNumButtons());
 		currentBird = birds.get(correctBirdIndex);
 
-		imageLabel.setIcon(new ImageIcon(currentBird.getImagePath()));
+		theBird.setText(currentBird.getBirdName());
 
 		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
-			buttons.get(i).setText(birds.get(i).getBirdName());
+			birdImageButtons.get(i).setIcon(new ImageIcon(birds.get(i).getImagePath()));
+			birdImageButtons.get(i).setActionCommand(birds.get(i).getBirdName());
 		}
 	}
 
@@ -86,15 +94,15 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent event) {
 		JButton sourceButton = (JButton) event.getSource();
-		if (sourceButton.getText().equals(currentBird.getBirdName())) {
+		if (sourceButton.getActionCommand().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			sessionScore.incrementScore();
 			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers());
 		} else {
 			sourceButton.setBackground(Color.RED);
-			for (int i = 0; i < buttons.size(); i++) {
-				if (buttons.get(i).getText().equals(currentBird.getBirdName())) {
-					buttons.get(i).setBackground(Color.GREEN);
+			for (int i = 0; i < birdImageButtons.size(); i++) {
+				if (birdImageButtons.get(i).getActionCommand().equals(currentBird.getBirdName())) {
+					birdImageButtons.get(i).setBackground(Color.GREEN);
 				}
 			}
 		}
@@ -119,35 +127,12 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 * done.
 	 */
 	public void endProgram() {
-
-		String[] options = { "Take Another Quiz", "Return To Login" };
+		scoreLabel.setText("You Answered " + sessionScore.getNumAnsweredQuestions() + "/"
+				+ sessionScore.getNumQuestions() + "correctly");
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
-
-
-		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
-				+ sessionScore.getNumQuestions() + "correctly", "End Of Quiz", 0,
-				JOptionPane.QUESTION_MESSAGE, null, options, 1);
-		if(options.equals(options[0])){
-			
-			StartScreen start=new StartScreen();
-			start.setVisible(true);
-			this.setVisible(false);
-			
-			
-		}else{
-			DifficultyGui gui=new DifficultyGui(currentUser);
-			gui.setVisible(true);
-			this.setVisible(false);
-			
-		}
-
-		
-
-		
-	
 	}
 
 	/**
@@ -160,9 +145,9 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				for (int i = 0; i < buttons.size(); i++) { // sets all buttons
+				for (int i = 0; i < birdImageButtons.size(); i++) { // sets all buttons
 															// to default
-					buttons.get(i).setBackground(defaultColor);
+					birdImageButtons.get(i).setBackground(defaultColor);
 				}
 				displayQuestion();
 			}

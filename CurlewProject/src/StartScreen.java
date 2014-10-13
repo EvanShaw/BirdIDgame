@@ -1,28 +1,25 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartScreen extends JFrame implements ActionListener {
-		//fields
+
 	private User theUser;
 	private JButton logIn;
-	
-
 	private JTextField userName;
-	private JLabel enterUserName;
+	private JLabel welcome;
 
 	public StartScreen() {
 		super("Bird Identification Quiz");
 
-		logIn = new JButton("Log in/ register");
-	
-
+		welcome = new JLabel("Welcome to Curlew's Bird Identification Quiz!");
+		welcome.setFont(welcome.getFont().deriveFont(18.0f));
+		welcome.setHorizontalAlignment(JTextField.CENTER);
+		logIn = new JButton("Log In/Register");
 		userName = new JTextField("Enter Username");
-		enterUserName = new JLabel(
-				"If this your first time click the create new username button",
-				SwingConstants.CENTER);
+		userName.setFont(userName.getFont().deriveFont(15.0f));
+		userName.setHorizontalAlignment(JTextField.CENTER);
 
 		this.setSize(500, 200);
 		this.setLayout(new BorderLayout());
@@ -30,22 +27,13 @@ public class StartScreen extends JFrame implements ActionListener {
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
-		contain.add(new JLabel("Welcome To Curlew's Bird Identification Quiz"),
-				BorderLayout.NORTH);
-
-		JPanel center = new JPanel(new GridLayout(2, 0));
-		center.add(userName);
-		
-
+		contain.add(welcome, BorderLayout.NORTH);
+		contain.add(userName, BorderLayout.CENTER);
 		JPanel userBtnPanel = new JPanel(new FlowLayout());
 		contain.add(userBtnPanel, BorderLayout.SOUTH);
-		contain.add(center, BorderLayout.CENTER);
-
 		userBtnPanel.add(logIn);
-		
-
 		logIn.addActionListener(this);
-			}
+	}
 
 	
 	@Override
