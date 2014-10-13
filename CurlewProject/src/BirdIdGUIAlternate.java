@@ -18,9 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-
 public class BirdIdGUIAlternate extends JFrame implements ActionListener {
-	
+
 	private User currentUser;
 	private Difficulty chosenDifficulty;
 	private JLabel scoreLabel;
@@ -31,7 +30,7 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	private ArrayList<JButton> birdImageButtons;
 	private int correctBirdIndex;
 	private final Color defaultColor;
-	
+
 	public BirdIdGUIAlternate(ArrayList<Bird> birds, User currentUser,
 			Difficulty chosenDifficulty) {
 		super("BirdIdGUIAlternate");
@@ -83,8 +82,10 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 		theBird.setText(currentBird.getBirdName());
 
 		for (int i = 0; i < chosenDifficulty.getNumButtons(); i++) {
-			birdImageButtons.get(i).setIcon(new ImageIcon(birds.get(i).getImagePath()));
-			birdImageButtons.get(i).setActionCommand(birds.get(i).getBirdName());
+			birdImageButtons.get(i).setIcon(
+					new ImageIcon(birds.get(i).getImagePath()));
+			birdImageButtons.get(i)
+					.setActionCommand(birds.get(i).getBirdName());
 		}
 	}
 
@@ -102,7 +103,8 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < birdImageButtons.size(); i++) {
-				if (birdImageButtons.get(i).getActionCommand().equals(currentBird.getBirdName())) {
+				if (birdImageButtons.get(i).getActionCommand()
+						.equals(currentBird.getBirdName())) {
 					birdImageButtons.get(i).setBackground(Color.GREEN);
 				}
 			}
@@ -129,12 +131,10 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 
-		String[] options = { 
-				"Take Another Quiz", 
-				"Return To Login" 
-				};
+		String[] options = { "Take Another Quiz", "Return To Login" };
 
-		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+		scoreLabel.setText("You Answered "
+				+ sessionScore.getNumCorrectAnswers() + "/"
 				+ sessionScore.getNumQuestions() + " correctly");
 
 		currentUser.getUserScore().addToTotalScore(
@@ -142,28 +142,21 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
 
-
-		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
-				+ sessionScore.getNumQuestions() + "correctly", "End Of Quiz", 0,
-				JOptionPane.QUESTION_MESSAGE, null, options, 1);
-		if(options.equals(options[0])){
-			
-			StartScreen start=new StartScreen();
+		JOptionPane.showOptionDialog(null,
+				"You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+						+ sessionScore.getNumQuestions() + " correctly",
+				"End Of Quiz", 0, JOptionPane.QUESTION_MESSAGE, null, options, 1);
+		if (options.equals(options[0])) {
+			StartScreen start = new StartScreen();
 			start.setVisible(true);
 			this.setVisible(false);
-			
-			
-		}else{
-			DifficultyGui gui=new DifficultyGui(currentUser);
+
+		} else {
+			DifficultyGui gui = new DifficultyGui(currentUser);
 			gui.setVisible(true);
 			this.setVisible(false);
-			
+
 		}
-
-		
-
-		
-	
 	}
 
 	/**
@@ -176,8 +169,9 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				for (int i = 0; i < birdImageButtons.size(); i++) { // sets all buttons
-															// to default
+				for (int i = 0; i < birdImageButtons.size(); i++) { // sets all
+																	// buttons
+					// to default
 					birdImageButtons.get(i).setBackground(defaultColor);
 				}
 				displayQuestion();

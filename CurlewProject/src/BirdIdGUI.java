@@ -21,7 +21,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	private ArrayList<JButton> buttons;
 	private JLabel imageLabel;
 	private int correctBirdIndex;
-	
+
 	private final Color defaultColor;
 
 	public BirdIdGUI(ArrayList<Bird> birds, User currentUser,
@@ -44,9 +44,8 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
 
-		
-		JPanel southButtonPanel = new JPanel(new GridLayout(2,0));
-		contain.add(southButtonPanel, BorderLayout.SOUTH,SwingConstants.CENTER);
+		JPanel southButtonPanel = new JPanel(new GridLayout(2, 0));
+		contain.add(southButtonPanel, BorderLayout.SOUTH, SwingConstants.CENTER);
 
 		contain.add(scoreLabel, BorderLayout.NORTH);
 		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -121,38 +120,32 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	 */
 	public void endProgram() {
 
-		scoreLabel.setText("You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+		scoreLabel.setText("You Answered "
+				+ sessionScore.getNumCorrectAnswers() + "/"
 				+ sessionScore.getNumQuestions() + " correctly");
 
 		currentUser.getUserScore().addToTotalScore(
 				sessionScore.getNumCorrectAnswers(),
 				sessionScore.getNumQuestions());
 		currentUser.writeChangesToFile(currentUser.getUserScore());
-		
+
 		String[] options = { "Take Another Quiz", "Return To Login" };
 
-
-		JOptionPane.showOptionDialog(null, "You Answered " + sessionScore + "/"
-				+ sessionScore.getNumQuestions() + "correctly", "End Of Quiz", 0,
-				JOptionPane.QUESTION_MESSAGE, null, options, 1);
-		if(options.equals(options[0])){
-			
-			StartScreen start=new StartScreen();
+		JOptionPane.showOptionDialog(null,
+				"You Answered " + sessionScore.getNumCorrectAnswers() + "/"
+						+ sessionScore.getNumQuestions() + " correctly",
+				"End Of Quiz", 0, JOptionPane.QUESTION_MESSAGE, null, options, 1);
+		if (options.equals(options[0])) {
+			StartScreen start = new StartScreen();
 			start.setVisible(true);
 			this.setVisible(false);
-			
-			
-		}else{
-			DifficultyGui gui=new DifficultyGui(currentUser);
+
+		} else {
+			DifficultyGui gui = new DifficultyGui(currentUser);
 			gui.setVisible(true);
 			this.setVisible(false);
-			
+
 		}
-
-		
-
-		
-	
 	}
 
 	/**
@@ -165,13 +158,14 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 	public void resetAfterAction() {
 		Timer timer = new Timer(2000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//sets all buttons to default color
+				// sets all buttons to default color
 				for (int i = 0; i < buttons.size(); i++) {
 					buttons.get(i).setBackground(defaultColor);
 				}
 				displayQuestion();
 			}
 		});
-		timer.setRepeats(false); timer.start(); // timer.stop();
+		timer.setRepeats(false);
+		timer.start(); // timer.stop();
 	}
 }

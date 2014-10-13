@@ -26,9 +26,9 @@ public class DifficultyGui extends JFrame implements ActionListener {
 	public DifficultyGui(User theUser) {
 		super("Choose Difficulty");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		this.theUser = theUser;
-		
+
 		this.setSize(300, 220);
 		this.setLayout(new BorderLayout());
 
@@ -39,7 +39,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		chooseDifficulty = new JLabel("Choose Difficulty:");
 		chooseDifficulty.setFont(chooseDifficulty.getFont().deriveFont(17.0f));
 		chooseDifficulty.setHorizontalAlignment(JTextField.CENTER);
-		
+
 		questionSelectorLabel = new JLabel("Answer questions by");
 		questionByImage = new JRadioButton("image");
 		questionByImage.setSelected(true);
@@ -47,7 +47,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		group = new ButtonGroup();
 		group.add(questionByImage);
 		group.add(questionByName);
-		
+
 		JPanel north = new JPanel(new GridLayout(2, 1));
 		this.add(north, BorderLayout.NORTH);
 		north.add(questionSelectorLabel);
@@ -55,7 +55,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		north.add(radioButtonPanel);
 		radioButtonPanel.add(questionByImage);
 		radioButtonPanel.add(questionByName);
-		
+
 		this.add(chooseDifficulty, BorderLayout.CENTER);
 		JPanel south = new JPanel(new GridLayout(2, 1));
 		this.add(south, BorderLayout.SOUTH);
@@ -70,7 +70,11 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		south.add(southButtons);
 
 		JPanel southLabels = new JPanel(new GridLayout(3, 3));
-		labels = new JLabel[]{new JLabel("Easy:"), new JLabel("Medium:"), new JLabel("Hard:"), new JLabel("3 Options"), new JLabel("4 Options"), new JLabel("5 Options"), new JLabel("20 Questions"), new JLabel("30 Questions"), new JLabel("40 Questions")};
+		labels = new JLabel[] { new JLabel("Easy:"), new JLabel("Medium:"),
+				new JLabel("Hard:"), new JLabel("3 Options"),
+				new JLabel("4 Options"), new JLabel("5 Options"),
+				new JLabel("20 Questions"), new JLabel("30 Questions"),
+				new JLabel("40 Questions") };
 		for (int i = 0; i < labels.length; i++) {
 			labels[i].setFont(labels[i].getFont().deriveFont(10.0f));
 			labels[i].setHorizontalAlignment(JTextField.CENTER);
@@ -86,10 +90,12 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		BirdLibrary library = new BirdLibrary();
 
 		if (group.isSelected(questionByImage.getModel())) {
-			BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), theUser, difficulty);
+			BirdIdGUI myFrame = new BirdIdGUI(library.getLibrary(), theUser,
+					difficulty);
 			myFrame.setVisible(true);
 		} else if (group.isSelected(questionByName.getModel())) {
-			BirdIdGUIAlternate myFrame = new BirdIdGUIAlternate(library.getLibrary(), theUser, difficulty);
+			BirdIdGUIAlternate myFrame = new BirdIdGUIAlternate(
+					library.getLibrary(), theUser, difficulty);
 			myFrame.setVisible(true);
 		} else {
 			throw new NullPointerException();
