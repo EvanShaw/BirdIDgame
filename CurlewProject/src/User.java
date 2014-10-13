@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.FileWriter;
 
@@ -21,6 +20,7 @@ public class User {
 				while (scanner.hasNextLine()) {
 					splitStrings = scanner.nextLine().split(",");
 					if (splitStrings[0].equals(userName)) {
+						//testing
 						System.out.print("user exists");
 						isPreviousUser = true;
 						String oldScore = splitStrings[1];
@@ -29,12 +29,11 @@ public class User {
 						String totalQuestions = splitOldScore[1];
 						int intTotalCorrect = Integer.parseInt(totalCorrect);
 						int intTotalQuestions = Integer.parseInt(totalQuestions);
+						//testing
 						System.out.println(intTotalCorrect);
 						System.out.println(intTotalQuestions);
-
 						userScore = new Score(intTotalCorrect, intTotalQuestions);
 					}
-					
 				}
 				scanner.close();
 				if (isPreviousUser == false) {
@@ -84,35 +83,26 @@ public class User {
 			String[] splitStrings = {};
 			while (scanner.hasNextLine()) {
 				splitStrings = scanner.nextLine().split(",");
+				//testing
 				System.out.println("userName: " + splitStrings[0] + " score: " + splitStrings[1]);
 				if (!splitStrings[0].equals(userName)) {
+					//testing
 					System.out.println("the name in this line does not equal " + userName);
-					//newFileWriter.write(scanner.nextLine() + "\n");
-					//newFileWriter.flush();
-					
 					writer.write(splitStrings[0] + "," + splitStrings[1] + "\n");
 					writer.flush();
-					
 				} 
 			}
 
-
 			int correctAnswers = newScore.getNumCorrectAnswers();
 			int numQuestions = newScore.getNumQuestions();
+			//testing
 			System.out.println(correctAnswers);
 			System.out.println(numQuestions);
-			
-
 			System.out.println("score to be added: " + userScore.getTotalScore());
 			
 			writer.write(userName + "," + newScore.getTotalScore() + "\n");
-			//newFileWriter.append(userName + "," + newScore.getTotalScore());
-			//writer.write
-			
 			
 			scanner.close();
-			//newFileWriter.flush();
-			//newFileWriter.close();
 			writer.flush();
 			writer.close();
 
