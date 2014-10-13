@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.FileWriter;
 
@@ -21,7 +20,7 @@ public class User {
 				while (scanner.hasNextLine()) {
 					splitStrings = scanner.nextLine().split(",");
 					if (splitStrings[0].equals(userName)) {
-						System.out.print("user exists");
+						System.out.println("user exists");
 						isPreviousUser = true;
 						String oldScore = splitStrings[1];
 						String[] splitOldScore = oldScore.split("/");
@@ -29,9 +28,8 @@ public class User {
 						String totalQuestions = splitOldScore[1];
 						int intTotalCorrect = Integer.parseInt(totalCorrect);
 						int intTotalQuestions = Integer.parseInt(totalQuestions);
-						System.out.println(intTotalCorrect);
-						System.out.println(intTotalQuestions);
-
+						System.out.println(userName + ": " + intTotalCorrect + "/" + intTotalQuestions);
+						
 						userScore = new Score(intTotalCorrect, intTotalQuestions);
 					}
 					
