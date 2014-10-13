@@ -22,17 +22,14 @@ public class User {
 				while (scanner.hasNextLine()) {
 					splitStrings = scanner.nextLine().split(",");
 					if (splitStrings[0].equals(userName)) {
-						//testing
-						System.out.println("user exists");
 						isPreviousUser = true;
 						String oldScore = splitStrings[1];
+						
 						String[] splitOldScore = oldScore.split("/");
 						String totalCorrect = splitOldScore[0];
 						String totalQuestions = splitOldScore[1];
 						int intTotalCorrect = Integer.parseInt(totalCorrect);
 						int intTotalQuestions = Integer.parseInt(totalQuestions);
-						//testing
-						System.out.println(userName + ": " + intTotalCorrect + "/" + intTotalQuestions);
 						
 						userScore = new Score(intTotalCorrect, intTotalQuestions);
 					}
@@ -80,29 +77,18 @@ public class User {
 		File tempFile = new File(userInfo.getAbsolutePath() + ".tmp");
 
 		try {
+			
 			FileWriter writer = new FileWriter(tempFile);
 			Scanner scanner = new Scanner(userInfo);
 
-			// Read from the original file and write to the new
-			// unless content matches data to be removed.
+			// Read from the original file and write to the new one. If content matches
+			// data to be updated, update data before writing to the new file.
 			String[] splitStrings = {};
 			while (scanner.hasNextLine()) {
 				splitStrings = scanner.nextLine().split(",");
-				//testing
-				System.out.println("userName: " + splitStrings[0] + " score: " + splitStrings[1]);
 				if (splitStrings[0].equals(userName)) {
-					int correctAnswers = newScore.getNumCorrectAnswers();
-					int numQuestions = newScore.getNumQuestions();
-					//testing
-					System.out.println(correctAnswers);
-					System.out.println(numQuestions);
-					System.out.println("score to be added: " + userScore.getTotalScore());
-		
 					writer.write(userName + "," + newScore.getTotalScore() + "\n");
-		
 				} else {
-					//testing
-					System.out.println("the name in this line does not equal " + userName);
 					writer.write(splitStrings[0] + "," + splitStrings[1] + "\n");
 				}
 			}
@@ -111,7 +97,7 @@ public class User {
 			writer.flush();
 			writer.close();
 
-			// Rename the new file to the filename the original file had.
+			// Rename the new file to the name of the original file.
 			if (!tempFile.renameTo(userInfo)) {
 				System.out.println("Could not rename file");
 			}
