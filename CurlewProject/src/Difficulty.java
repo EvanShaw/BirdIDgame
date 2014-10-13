@@ -13,22 +13,22 @@ public class Difficulty {
 	public Difficulty() {
 		this.difficulty = "easy";
 		numOfButtons = 3;
-		numOfQuestions = 20;
+		numOfQuestions = 5;
 		
 	}
 	public void setDifficulty(String difficulty) {
 		if (difficulty.equalsIgnoreCase("easy")) {
 			difficulty = "Easy";
 			numOfButtons = 3;
-			numOfQuestions = 20;
+			numOfQuestions = 5;
 		} else if (difficulty.equalsIgnoreCase("medium")) {
 			difficulty = "Medium";
 			numOfButtons = 4;
-			numOfQuestions = 30;
+			numOfQuestions = 15;
 		} else if (difficulty.equalsIgnoreCase("hard")) {
 			difficulty = "Hard";
 			numOfButtons = 5;
-			numOfQuestions = 40;
+			numOfQuestions = 25;
 		}
 	}
 	public String getDifficulty() {

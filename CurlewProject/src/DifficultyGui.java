@@ -73,8 +73,8 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		labels = new JLabel[] { new JLabel("Easy:"), new JLabel("Medium:"),
 				new JLabel("Hard:"), new JLabel("3 Options"),
 				new JLabel("4 Options"), new JLabel("5 Options"),
-				new JLabel("20 Questions"), new JLabel("30 Questions"),
-				new JLabel("40 Questions") };
+				new JLabel("5 Questions"), new JLabel("15 Questions"),
+				new JLabel("25 Questions") };
 		for (int i = 0; i < labels.length; i++) {
 			labels[i].setFont(labels[i].getFont().deriveFont(10.0f));
 			labels[i].setHorizontalAlignment(JTextField.CENTER);
