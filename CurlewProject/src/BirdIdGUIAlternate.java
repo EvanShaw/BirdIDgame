@@ -26,7 +26,7 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 	private ArrayList<Bird> birds;
 	private Bird currentBird;
 	private Score sessionScore;
-	private JButton theBird;
+	private JLabel theBird;
 	private ArrayList<JButton> birdImageButtons;
 	private int correctBirdIndex;
 	private final Color defaultColor;
@@ -41,7 +41,7 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 		sessionScore = new Score(0, chosenDifficulty.getNumQuestions());
 		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers());
 		birdImageButtons = new ArrayList<JButton>();
-		theBird = new JButton();
+		theBird = new JLabel();
 
 		// basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
