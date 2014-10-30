@@ -45,7 +45,7 @@ public class User {
 			try {
 				userInfo.createNewFile();
 				FileWriter tempWriter = new FileWriter(userInfo, true);
-				tempWriter.write("User,0/0\n");
+				tempWriter.write("User,Score\n");
 				tempWriter.flush();
 				tempWriter.close();
 				addUser(userInfo);
@@ -87,11 +87,12 @@ public class User {
 			while (scanner.hasNextLine()) {
 				splitStrings = scanner.nextLine().split(",");
 				if (splitStrings[0].equals(userName)) {
-					writer.write(userName + "," + newScore.getTotalScore() + "\n");
+					writer.write(userName + "," + newScore.getTotalScore() + "\n"); 
 				} else {
 					writer.write(splitStrings[0] + "," + splitStrings[1] + "\n");
 				}
 			}
+			
 			
 			scanner.close();
 			writer.flush();
