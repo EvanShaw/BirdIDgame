@@ -15,7 +15,6 @@ public class Bird {
 	 * @param obj
 	 * @return boolean
 	 */
-	
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;

@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -132,7 +131,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		String[] options = { "Take Another Quiz", "Return To Login" };
 
 		int index = JOptionPane.showOptionDialog(null,
-				"Well done " + currentUser.getUserName() + ", you answered "
+				currentUser.getUserName() + ", you answered "
 						+ sessionScore.getNumCorrectAnswers() + "/"
 						+ sessionScore.getNumQuestions()
 						+ " correctly. Your new total score is "
