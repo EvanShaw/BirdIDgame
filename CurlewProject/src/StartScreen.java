@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /**
  * Provides the GUI for the first screen the user sees upon starting
  * the program - the login screen.
@@ -55,7 +56,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null,"All bird photographs (with the exception of American Bittern, which is in the public domain) \n " +
-					"are copyright (2011-2014) Susa Stonedahl, all rights reserved.");
+					"are copyright (2011-2014) Susa Stonedahl, all rights reserved.\n"+"Special thanks to Brett Mignin and Matt Leja for beta testing");
 		}
 	}
 }
