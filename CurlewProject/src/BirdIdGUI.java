@@ -39,11 +39,13 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		// basic window operations
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(760, 500);
+		this.getContentPane().setBackground(Color.DARK_GRAY );
 
 		// setting the panels and layouts
 		Container contain = this.getContentPane();
 		contain.setLayout(new BorderLayout());
-
+		scoreLabel.setForeground(Color.RED);
+		scoreLabel.setFont(scoreLabel.getFont().deriveFont(18.0f));
 		JPanel southButtonPanel = new JPanel(new GridLayout(2, 0));
 		contain.add(southButtonPanel, BorderLayout.SOUTH, SwingConstants.CENTER);
 
