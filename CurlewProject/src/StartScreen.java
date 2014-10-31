@@ -53,7 +53,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		}else{
 			
 			JOptionPane.showMessageDialog(null,"All bird photographs (with the exception of American Bittern, which is in the public domain) \n " +
-					"are copyright (2011-2014) Susa Stonedahl, all rights reserved."+"Special thanks to Brett Mignin and Matt Leja for beta testing");
+					"are copyright (2011-2014) Susa Stonedahl, all rights reserved."+" Special thanks to Brett Mignin and Matt Leja for beta testing");
 		}
 			
 	}
