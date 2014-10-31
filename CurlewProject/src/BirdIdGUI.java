@@ -32,7 +32,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		this.currentUser = currentUser;
 		this.chosenDifficulty = chosenDifficulty;
 		sessionScore = new Score(0, chosenDifficulty.getNumQuestions());
-		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers());
+		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers()+ "/"+chosenDifficulty.getNumQuestions());
 		imageLabel = new JLabel();
 		buttons = new ArrayList<JButton>();
 
