@@ -29,7 +29,7 @@ public class DifficultyGui extends JFrame implements ActionListener {
 
 		this.theUser = theUser;
 
-		this.setSize(300, 220);
+		this.setSize(400, 220);
 		this.setLayout(new BorderLayout());
 
 		easy = new JButton("Easy");
@@ -41,9 +41,9 @@ public class DifficultyGui extends JFrame implements ActionListener {
 		chooseDifficulty.setHorizontalAlignment(JTextField.CENTER);
 
 		questionSelectorLabel = new JLabel("Answer questions by");
-		questionByImage = new JRadioButton("image");
+		questionByImage = new JRadioButton("Guessing the name");
 		questionByImage.setSelected(true);
-		questionByName = new JRadioButton("name");
+		questionByName = new JRadioButton("Guessing the picutre");
 		group = new ButtonGroup();
 		group.add(questionByImage);
 		group.add(questionByName);
