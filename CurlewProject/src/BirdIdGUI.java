@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		this.currentUser = currentUser;
 		this.chosenDifficulty = chosenDifficulty;
 		sessionScore = new Score(0, chosenDifficulty.getNumQuestions());
-		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers()+"/"+ chosenDifficulty.getNumQuestions());
+		scoreLabel = new JLabel("Score: " + sessionScore.getNumCorrectAnswers());
 		imageLabel = new JLabel();
 		buttons = new ArrayList<JButton>();
 
@@ -88,7 +89,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			sessionScore.incrementScore();
-			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers()+"/"+ chosenDifficulty.getNumQuestions());
+			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers());
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < buttons.size(); i++) {
@@ -131,7 +132,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		String[] options = { "Take Another Quiz", "Return To Login" };
 
 		int index = JOptionPane.showOptionDialog(null,
-				currentUser.getUserName() + ", you answered "
+				"Well done " + currentUser.getUserName() + ", you answered "
 						+ sessionScore.getNumCorrectAnswers() + "/"
 						+ sessionScore.getNumQuestions()
 						+ " correctly. Your new total score is "

@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class StartScreen extends JFrame implements ActionListener {
 
@@ -10,7 +12,7 @@ public class StartScreen extends JFrame implements ActionListener {
 	private JButton about;
 	private JTextField userName;
 	private JLabel welcome;
-	
+
 	public StartScreen() {
 		super("Bird Identification Quiz");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,9 +52,11 @@ public class StartScreen extends JFrame implements ActionListener {
 		DifficultyGui setDifficulty = new DifficultyGui(theUser);
 		setDifficulty.setVisible(true);
 		this.dispose();
-		} else {
+		}else{
+			
 			JOptionPane.showMessageDialog(null,"All bird photographs (with the exception of American Bittern, which is in the public domain) \n " +
-					"are copyright (2011-2014) Susa Stonedahl, all rights reserved.\n"+"Special thanks to Brett Mignin and Matt Leja for beta testing");
+					"are copyright (2011-2014) Susa Stonedahl, all rights reserved.");
 		}
+			
 	}
 }

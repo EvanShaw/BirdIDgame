@@ -14,12 +14,8 @@ public class Difficulty {
 		this.difficulty = "easy";
 		numOfButtons = 3;
 		numOfQuestions = 5;
+		
 	}
-	
-	/**
-	 * Set the difficulty based on user choice; edit fields accordingly
-	 * @param difficulty
-	 */
 	public void setDifficulty(String difficulty) {
 		if (difficulty.equalsIgnoreCase("easy")) {
 			difficulty = "Easy";
@@ -35,24 +31,12 @@ public class Difficulty {
 			numOfQuestions = 25;
 		}
 	}
-	
-	/**
-	 * Allows access to difficulty field
-	 */
 	public String getDifficulty() {
 		return difficulty;
 	}
-	
-	/**
-	 * Allows access to numOfButtons field
-	 */
 	public int getNumButtons() {
 		return numOfButtons;
 	}
-	
-	/**
-	 * Allows access to numOfQuestions field
-	 */
 	public int getNumQuestions() {
 		return numOfQuestions;
 	}
