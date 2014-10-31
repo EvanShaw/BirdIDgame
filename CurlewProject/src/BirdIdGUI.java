@@ -91,7 +91,7 @@ public class BirdIdGUI extends JFrame implements ActionListener {
 		if (sourceButton.getText().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			sessionScore.incrementScore();
-			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers());
+			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers()+ "/"+chosenDifficulty.getNumQuestions());
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < buttons.size(); i++) {

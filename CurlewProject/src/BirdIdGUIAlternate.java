@@ -104,7 +104,7 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 		if (sourceButton.getActionCommand().equals(currentBird.getBirdName())) {
 			sourceButton.setBackground(Color.GREEN);
 			sessionScore.incrementScore();
-			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers());
+			scoreLabel.setText("Score: " + sessionScore.getNumCorrectAnswers()+ "/"+chosenDifficulty.getNumQuestions());
 		} else {
 			sourceButton.setBackground(Color.RED);
 			for (int i = 0; i < birdImageButtons.size(); i++) {
