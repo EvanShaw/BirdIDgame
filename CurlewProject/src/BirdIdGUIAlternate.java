@@ -53,7 +53,8 @@ public class BirdIdGUIAlternate extends JFrame implements ActionListener {
 		contain.setLayout(new BorderLayout());
 		JPanel flowLayout = new JPanel(new FlowLayout());
 		JPanel southButtonPanel = new JPanel(new GridLayout(2, 0));
-		scoreLabel.setForeground(Color.RED);
+		scoreLabel.setForeground(Color.WHITE);
+		theBird.setForeground(Color.WHITE);
 		scoreLabel.setFont(scoreLabel.getFont().deriveFont(18.0f));
 		flowLayout.add(southButtonPanel);
 		contain.add(southButtonPanel, BorderLayout.SOUTH, SwingConstants.CENTER);
